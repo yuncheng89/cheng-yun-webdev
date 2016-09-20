@@ -10,7 +10,15 @@ app.use(express.static(__dirname + '/public'));
 
 require ("./test/app.js")(app);
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port      = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+app.get('/env', function(req,res){
+   res.json(process.env);
+});
+
+var ipaddress = process.env.IP;
+var port      = process.env.PORT || 3000;
+
+console.log(ipaddress);
+console.log(port);
 
 app.listen(port, ipaddress);
+
