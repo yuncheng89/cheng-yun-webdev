@@ -3,5 +3,15 @@ input.form-control {
 }
 
 body {
-    padding-top: 36px;
+    padding-top: 60px;
+    padding-bottom: 65px;
+    overflow: hidden;
+}
+
+nav {
+    padding-right: 15px;
+}
+
+.white, .white a {
+    color: #fff;
 }
