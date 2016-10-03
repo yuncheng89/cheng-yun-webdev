@@ -20,3 +20,11 @@ body {
 .borderless li {
     border-top: none;
 }
+
+
+.hidden-xs {
+
+    position:absolute;
+    top:0px;
+    bottom:5px; margin-top:50px; padding-top:10px; margin-bottom:50px; overflow:auto;
+}
