@@ -16,3 +16,7 @@ body {
 
     color: white;
 }
+
+.borderless li {
+    border-top: none;
+}
