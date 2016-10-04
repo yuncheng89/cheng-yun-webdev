@@ -16,7 +16,7 @@ module.exports = function(app)
         connectionString = 'mongodb://'+
             username +':'+
             password +
-            '@ds033116.mlab.com:33116/cs6510_test';
+            '@ds049446.mlab.com:49446/cs5610';
     }
 
     console.log(connectionString);
