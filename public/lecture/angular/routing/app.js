@@ -11,10 +11,10 @@ angular
 function Config($routeProvider) {
     $routeProvider
         .when('/login', {
-            templateUrl: 'login.html'
+            templateUrl: 'login.view.client.html'
         })
         .when('/register', {
-            templateUrl: 'register.html'
+            templateUrl: 'register.view.client.html'
         })
 
 }
