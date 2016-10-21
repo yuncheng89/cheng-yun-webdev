@@ -2,10 +2,10 @@
         <div class="container-fluid">
 
             <div class="nav-bar header">
-                <a class="navbar-brand" href="profile.html">Websites</a>
+                <a class="navbar-brand" href="#/user/{{model.user._id}}/website">Websites</a>
 
-                <a class="navbar-brand pull-right" href="profile.html">
-                    <span class = "glyphicon glyphicon-ok"></span>
+                <a class="navbar-brand pull-right" href="#/user/{{model.user._id}}/website/new">
+                    <span class = "glyphicon glyphicon-plus"></span>
                 </a>
 
             </div>
@@ -18,7 +18,8 @@
 
         <ul class="list-group">
             <li ng-repeat="website in model.websites" class="list-group-item">
-                <a href="#">
+
+                <a href="#/user/{{model.user._id}}/website/{{website._id}}/page">
                     {{website.name}}
                 </a>
                 <a href="#/user/{{model.user._id}}/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">

@@ -1,13 +1,13 @@
 (function(){
     angular
         .module("WebAppMaker")
-        .factory("WebsiteService", WebsiteService);
+        .factory("PageService", PageService);
 
-    function WebsiteService() {
+    function PageService() {
         var pages = [
-            { "_id": "321", "name": "Post 1", "websiteId": "456", "description": "Lorem" },
-            { "_id": "432", "name": "Post 2", "websiteId": "456", "description": "Lorem" },
-            { "_id": "543", "name": "Post 3", "websiteId": "456", "description": "Lorem" }
+            { "_id": 321, "name": "Post 1", "websiteId": 456, "description": "Lorem" },
+            { "_id": 432, "name": "Post 2", "websiteId": 456, "description": "Lorem" },
+            { "_id": 543, "name": "Post 3", "websiteId": 456, "description": "Lorem" }
         ];
 
         var api = {
@@ -26,7 +26,7 @@
         function findPageByWebsiteId(websiteId) {
             var result = [];
             for(var p in pages) {
-                if(pages[p].websiteId === websiteId) {
+                if(pages[p].websiteId == websiteId) {
                     result.push(pages[p]);
                 }
             }
