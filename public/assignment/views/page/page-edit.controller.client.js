@@ -9,15 +9,13 @@
     function PageEditController($routeParams, UserService, WebsiteService, PageService) {
         var vm = this;
 
-        var userId = parseInt($routeParams['uid']);
-        var websiteId = parseInt($routeParams['wid']);
-        var pageId = parseInt($routeParams['pid']);
+        vm.uid = parseInt($routeParams['uid']);
+        vm.wid = parseInt($routeParams['wid']);
+        vm.pid = parseInt($routeParams['pid']);
 
         function init() {
-            vm.user = UserService.findUserById(userId);
-            vm.website = WebsiteService.findWebsiteById(websiteId);
-            vm.pages = PageService.findPageByWebsiteId(websiteId);
-            vm.page = PageService.findPageById(pageId);
+            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            vm.page = PageService.findPageById(vm.pid);
         }
         init();
 

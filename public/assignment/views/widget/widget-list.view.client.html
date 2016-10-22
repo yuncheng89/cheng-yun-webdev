@@ -1,47 +1,51 @@
-    <nav class="navbar navbar-default navbar-fixed-top bg-primary">
-        <div class="container-fluid">
-
-            <div class="nav-bar header">
-                <a class="navbar-brand" href="#/user/{{model.uid}}/website">Widgets</a>
-
-                <a class="navbar-brand pull-right" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new">
-                    <span class = "glyphicon glyphicon-plus"></span>
-                </a>
-
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="row container-fluid col-sm-12">
+            <div class="col-sm-12">
+                <div class="navbar-text pull-left" style="margin-left: 0px">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                </div>
+                <div class="navbar-text pull-right" style="margin-right: 0px;">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </a>
+                </div>
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
+                        Widgets
+                    </a>
+                </div>
             </div>
-
         </div>
     </nav>
 
-    <div class="row container-fluid">
+    <div class="row container">
 
-            <div ng-switch="widget.widgetType"   ng-repeat="widget in model.widgets">
-                {{widget}}
-
-                <a href="/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget.wgid}}" class="pull-right">
-                    <span class="glyphicon glyphicon-cog"></span>
-                </a>
-
-
-                <div ng-switch="widget.size" ng-switch-when="HEADER">
-                    <h1 ng-switch-when="1">{{widget.text}}</h1>
-                    <h2 ng-switch-when="2">{{widget.text}}</h2>
-                    <h3 ng-switch-when="3">{{widget.text}}</h3>
-                    <h4 ng-switch-when="4">{{widget.text}}</h4>
-                    <h5 ng-switch-when="5">{{widget.text}}</h5>
-                    <h6 ng-switch-when="6">{{widget.text}}</h6>
-                </div>
-
-
-                <div ng-switch-when="YOUTUBE">
-                    <iframe width="560" height="315" ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
-                </div>
-                <div ng-switch-when="IMAGE">image</div>
-
-                <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
-                </div>
-
+        <div ng-switch="widget.widgetType"
+             ng-repeat="widget in model.widgets">
+            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}" class="pull-right">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <div ng-switch="widget.size" ng-switch-when="HEADER">
+                <h1 ng-switch-when="1">{{widget.text}}</h1>
+                <h2 ng-switch-when="2">{{widget.text}}</h2>
+                <h3 ng-switch-when="3">{{widget.text}}</h3>
+                <h4 ng-switch-when="4">{{widget.text}}</h4>
+                <h5 ng-switch-when="5">{{widget.text}}</h5>
+                <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
+            <div ng-switch-when="YOUTUBE">
+                <iframe width="560" height="315"
+                        ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
+                        frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div ng-switch-when="IMAGE">
+                image
+            </div>
+            <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
+            </div>
+        </div>
 
     </div>
 

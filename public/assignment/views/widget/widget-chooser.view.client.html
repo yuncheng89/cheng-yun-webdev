@@ -1,19 +1,23 @@
 
-<nav class="navbar navbar-dark navbar-fixed-top bg-primary">
-    <div class="container-fluid">
-
-        <div class="nav-bar header white">
-
-            <div class="nav-bar header white">
-                <a class="navbar-text pull-left" href="../../widget-list.html">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-sm-12">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-                <a class="navbar-brand" href="widget-chooser.view.client.html">Choose Widget</a>
-
             </div>
-
+            <div class="navbar-text pull-right" style="margin-right: 0px;">
+                <a href="#">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new">
+                    Choose Widget
+                </a>
+            </div>
         </div>
-
     </div>
 </nav>
 
@@ -53,10 +57,10 @@
 
 </div>
 
-<nav class="navbar navbar-dark navbar-fixed-bottom bg-primary">
+<nav class="navbar navbar-default navbar-fixed-bottom bg-primary">
     <div class="container-fluid">
         <div class="row navbar-text pull-right">
-            <a href="../user/profile.view.client.html" class="navbar-link white">
+            <a href="../user/profile.view.client.html" class="navbar-link">
                 <span class="glyphicon glyphicon-user"></span>
             </a>
         </div>

@@ -17,8 +17,7 @@
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
 
         function init() {
-            //vm.widgets = WidgetService.findAllWidgets();
-            vm.widget = WidgetService.findWidgetsForPage(vm.pid);
+            vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
         }
         init();
 

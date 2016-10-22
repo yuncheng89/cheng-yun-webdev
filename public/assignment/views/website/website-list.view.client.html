@@ -1,17 +1,24 @@
-    <nav class="navbar navbar-default navbar-fixed-top bg-primary">
-        <div class="container-fluid">
-
-            <div class="nav-bar header">
-                <a class="navbar-brand" href="#/user/{{model.user._id}}/website">Websites</a>
-
-                <a class="navbar-brand pull-right" href="#/user/{{model.user._id}}/website/new">
-                    <span class = "glyphicon glyphicon-plus"></span>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid col-sm-12">
+        <div class="col-sm-12">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
-
             </div>
-
+            <div class="navbar-text pull-right" style="margin-right: 0px;">
+                <a href="#/user/{{model.uid}}/website/new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/website">
+                    Websites
+                </a>
+            </div>
         </div>
-    </nav>
+    </div>
+</nav>
 
     <div class="row container-fluid">
             <!--{{model.websites}}-->
@@ -19,10 +26,10 @@
         <ul class="list-group">
             <li ng-repeat="website in model.websites" class="list-group-item">
 
-                <a href="#/user/{{model.user._id}}/website/{{website._id}}/page">
+                <a href="#/user/{{model.uid}}/website/{{website._id}}/page">
                     {{website.name}}
                 </a>
-                <a href="#/user/{{model.user._id}}/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">
+                <a href="#/user/{{model.uid}}/website/{{website._id}}" class="pull-right" style="margin-left: 15px;">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <a href="#" class="pull-right">
@@ -37,7 +44,7 @@
     <nav class="navbar navbar-default navbar-fixed-bottom bg-primary">
         <div class="container-fluid">
             <div class="nav-bar header">
-                <a href="#/user/{{model.user._id}}" class="navbar-brand pull-right">
+                <a href="#/user/{{model.uid}}" class="navbar-brand pull-right">
                     <span class = "glyphicon glyphicon-user"></span>
                 </a>
             </div>

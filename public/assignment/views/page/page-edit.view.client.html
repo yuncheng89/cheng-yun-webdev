@@ -2,17 +2,17 @@
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left">
-                <a href="#/user/{{model.user._id}}/website">
+                <a href="#/user/{{model.uid}}/website">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#/user/{{model.user._id}}/website/{{model.website._id}}/page">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page">
                     Pages
                 </a>
             </div>
             <div class="navbar-text pull-right">
-                <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/new">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/new">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </div>
@@ -24,7 +24,7 @@
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}">
                     Edit Page
                 </a>
             </div>
@@ -37,10 +37,10 @@
     <div class="col-xs-4 hidden-xs">
         <ul class="list-group">
             <li ng-repeat="page in model.pages" class="list-group-item">
-                <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{page._id}}/widget">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}/widget">
                     {{page.name}}
                 </a>
-                <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{page._id}}" class="pull-right" style="margin-left: 15px;">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{page._id}}" class="pull-right" style="margin-left: 15px;">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <a href="#" class="pull-right">
@@ -57,11 +57,11 @@
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" placeholder="Blog Post">
+                <input type="text" class="form-control" id="name" placeholder="{{model.page.name}}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea type="text" class="form-control" rows="5" id="description" placeholder="This is a blog post."></textarea>
+                <textarea type="text" class="form-control" rows="5" id="description" placeholder="{{model.page.description}}"></textarea>
             </div>
         </form>
 
@@ -84,7 +84,7 @@
             <div class="navbar-header pull-right">
                 <!--Right Footer-->
                 <p class="navbar-text">
-                    <a href="#/user/{{model.user._id}}" class="navbar-link white">
+                    <a href="#/user/{{model.uid}}" class="navbar-link white">
                         <span class="glyphicon glyphicon-user "></span>
                     </a>
                 </p>
