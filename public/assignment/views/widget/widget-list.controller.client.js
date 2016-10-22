@@ -6,14 +6,14 @@
         .module("WebAppMaker")
         .controller("WidgetListController", WidgetListController);
 
-    function WidgetListController($routeParams, WidgetService, $sce) {
+    function WidgetListController($routeParams,
+                                  WidgetService, $sce) {
         var vm = this;
-        vm.pid = $routeParams.pid;
         vm.uid = $routeParams.uid;
         vm.wid = $routeParams.wid;
+        vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
-
-        vm.checkSafteHtml = checkSafeHtml;
+        vm.checkSafeHtml = checkSafeHtml;
         vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
 
         function init() {
