@@ -14,6 +14,7 @@
         console.log("websiteId:", vm.wid);
 
         vm.deleteWebsite  = deleteWebsite;
+        vm.updateWebsite = updateWebsite;
 
         function init() {
             vm.user = UserService.findUserById(vm.uid);
@@ -27,6 +28,15 @@
             console.log("Delete website "+vm.wid);
             WebsiteService.deleteWebsite(vm.wid);
             $location.url("/user/"+vm.uid+"/website");
+        }
+
+        function updateWebsite(name, description) {
+            var updated = {_id: vm.wid, name: name, developerId: vm.uid, description: description};
+            WebsiteService.updateWebsite(vm.wid, updated);
+
+            vm.website = updated;
+            $location.url("/user/"+vm.uid+"/website");
+
         }
     }
 

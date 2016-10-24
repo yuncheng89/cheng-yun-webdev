@@ -57,7 +57,17 @@
         }
 
         function updateWebsite(websiteId, website) {
-            //TODO
+            for(var w in websites) {
+                websiteToReplace = websites[w];
+                if(websiteToReplace._id === websiteId) {
+                    var start_index = w;
+                    var number_of_elements_to_remove = 1;
+                    websites.splice(start_index, number_of_elements_to_remove, website);
+                }
+            }
+
+            console.log(website);
+            return null;
         }
 
         function deleteWebsite(websiteId) {
