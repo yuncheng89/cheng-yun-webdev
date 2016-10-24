@@ -46,7 +46,14 @@
         }
 
         function deletePage(pageId) {
-            //TODO
+            var page = findPageById(pageId);
+            var index = pages.indexOf(page);
+
+            console.log("Page to be deleted is at index "+index);
+
+            if (index > -1) {
+                pages.splice(index, 1);
+            }
         }
 
     }
