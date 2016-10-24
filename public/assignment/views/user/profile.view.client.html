@@ -2,9 +2,9 @@
     <div class="container-fluid">
 
         <div class="nav-bar header">
-            <a class="navbar-brand" href="profile.html">Profile</a>
+            <a class="navbar-brand" href="#/user/{{model.user._id}}">Profile</a>
 
-            <a class="navbar-brand pull-right" href="profile.html">
+            <a ng-click="model.register(model.user.username, model.user.password, model.user.firstName, model.user.lastName)" class="navbar-brand pull-right">
                 <span class = "glyphicon glyphicon-ok"></span>
             </a>
 
