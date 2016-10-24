@@ -2,20 +2,18 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" placeholder="{{model.widget.name}}">
         </div>
         <div class="form-group">
             <label for="text">Text</label>
-            <input type="email" class="form-control" id="text" placeholder="Text">
+            <input type="email" class="form-control" id="text" placeholder="{{model.widget.text}}">
         </div>
         <div class="form-group">
             <label for="url">URL</label>
-            <input type="text" class="form-control" id="url" placeholder="https://www.youtube.com/watch?v=BHLmLmDZ5Zo">
+            <input type="text" class="form-control" id="url" placeholder="{{model.widget.url}}">
         </div>
         <div class="form-group">
             <label for="width">Width</label>
-            <input type="text" class="form-control" id="width" placeholder="100%">
+            <input type="text" class="form-control" id="width" placeholder="{{model.widget.width}}">
         </div>
-        <a class="btn btn-danger  btn-block"
-           href="../../widget-list.html">Delete</a>
     </form>

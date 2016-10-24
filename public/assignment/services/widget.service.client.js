@@ -29,13 +29,26 @@
         };
         return api;
 
-        function createWidget(pageId, widget) {
-            //TODO
-            return null;
+        function createWidget(pageId, widgetType) {
+            var newWidget = new Object();
+
+            var id = parseInt(Math.random() * 1000);
+            while (findWidgetById(id)!=null) {
+                id = parseInt(Math.random() * 1000);
+            }
+
+            newWidget._id = id;
+            newWidget.widgetType = widgetType;
+            newWidget.pageId = pageId;
+            newWidget.text = "Enter widget text here";
+            newWidget.size = 4;
+
+            widgets.push(newWidget);
+            return newWidget;
         }
 
         function findWidgetsByPageId(pageId) {
-            /*
+
             var result = [];
             for(var g in widgets) {
                 if(widgets[g].pageId === pageId) {
@@ -43,13 +56,14 @@
                 }
             }
             return result;
-            */
-            return widgets;
+
+            //return widgets;
         }
 
         function findWidgetById(widgetId) {
             for (var g in widgets) {
                 if (widgets[g]._id == widgetId) {
+                    console.log("Found widget with id "+widgetId);
                     return widgets[g];
                 }
             }
@@ -62,74 +76,15 @@
         }
 
         function deleteWidget(widgetId) {
-            //TODO
-            return null;
+            var widget = findWidgetById(widgetId);
+            var index = widgets.indexOf(widget);
+
+            console.log("Widget to be deleted is at index "+index);
+
+            if (index > -1) {
+                widgets.splice(index, 1);
+            }
         }
     }
 })();
 
-/*
-(function() {
-   angular
-       .module("WebAppMaker")
-       .factory("WidgetService", WidgetService);
-
-    function WidgetService() {
-        var widgets = [
-            { "_id": 123, "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
-            { "_id": 234, "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-            { "_id": 345, "widgetType": "IMAGE", "pageId": "321", "width": "100%",
-                "url": "http://lorempixel.com/400/200/"},
-            { "_id": 456, "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
-            { "_id": 567, "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
-            { "_id": 678, "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
-                "url": "https://youtu.be/AM2Ivdi9c4E" },
-            { "_id": 789, "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
-        ];
-    }
-
-    var api = {
-        createWidget: createWidget,
-        findWidgetsByPageId: findWidgetsByPageId,
-        findWidgetById: findWidgetById,
-        updateWidget: updateWidget,
-        deleteWidget: deleteWidget
-    };
-    return api;
-
-    function createWidget(pageId, widget) {
-        //TODO
-        return null;
-    }
-
-    function findWidgetsByPageId(pageId) {
-        var result = [];
-        for(var g in widgets) {
-            if(widgets[g].pageId === pageId) {
-                result.push(widgets[g]);
-            }
-        }
-        return result;
-    }
-
-    function findWidgetById(widgetId) {
-        for (var g in widgets) {
-            if (widgets[g]._id == widgetId) {
-                return widgets[g];
-            }
-        }
-        return null;
-    }
-
-    function updateWidget(widgetId, widget) {
-        //TODO
-        return null;
-    }
-
-    function deleteWidget(widgetId) {
-        //TODO
-        return null;
-    }
-
-})();
-*/

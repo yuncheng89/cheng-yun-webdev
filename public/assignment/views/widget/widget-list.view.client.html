@@ -20,11 +20,13 @@
         </div>
     </nav>
 
+
+
+
     <div class="row container">
 
         <div ng-switch="widget.widgetType"
              ng-repeat="widget in model.widgets">
-
 
             <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
@@ -37,14 +39,18 @@
                 <h5 ng-switch-when="5">{{widget.text}}</h5>
                 <h6 ng-switch-when="6">{{widget.text}}</h6>
             </div>
+
+
             <div ng-switch-when="YOUTUBE">
                 <iframe width="560" height="315"
                         ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
                         frameborder="0" allowfullscreen></iframe>
             </div>
+
             <div ng-switch-when="IMAGE">
-                <img src="{{widget.url}}">
+                <img ng-src="{{widget.url}}">
             </div>
+
             <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
             </div>
         </div>

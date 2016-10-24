@@ -26,6 +26,7 @@
         }
 
         function checkSafeYouTubeUrl(url) {
+            console.log(url);
             var parts = url.split('/');
             var id= parts[parts.length-1];
             url = "https://www.youtube.com/embed/"+id;

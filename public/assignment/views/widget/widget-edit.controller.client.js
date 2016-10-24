@@ -7,7 +7,7 @@
         .module("WebAppMaker")
         .controller("WidgetEditController", WidgetEditController);
 
-    function WidgetEditController($routeParams,
+    function WidgetEditController($routeParams, $location,
                                   WidgetService, $sce) {
         var vm = this;
         vm.uid = $routeParams.uid;
@@ -15,10 +15,18 @@
         vm.pid = $routeParams.pid;
         vm.wgid = $routeParams.wgid;
 
+        vm.deleteWidget  = deleteWidget;
+
         function init() {
             vm.widget = WidgetService.findWidgetById(vm.wgid);
         }
         init();
+
+        function deleteWidget() {
+            console.log("Delete widget "+vm.wgid);
+            WidgetService.deleteWidget(vm.wgid);
+            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
+        }
 
     }
 })();
