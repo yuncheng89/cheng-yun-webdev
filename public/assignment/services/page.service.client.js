@@ -55,7 +55,7 @@
 
             for(var p in pages) {
                 pageToReplace = pages[p];
-                if(pageToReplace._id == pageId) {
+                if(pageToReplace._id === pageId) {
                     var start_index = p;
                     var number_of_elements_to_remove = 1;
                     pages.splice(start_index, number_of_elements_to_remove, page);

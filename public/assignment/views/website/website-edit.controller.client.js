@@ -21,7 +21,6 @@
             vm.websites = WebsiteService.findWebsitesForUser(vm.uid);
             vm.website = WebsiteService.findWebsiteById(vm.wid);
         }
-
         init();
 
         function deleteWebsite() {
@@ -33,7 +32,6 @@
         function updateWebsite(name, description) {
             var updated = {_id: vm.wid, name: name, developerId: vm.uid, description: description};
             WebsiteService.updateWebsite(vm.wid, updated);
-
             vm.website = updated;
             $location.url("/user/"+vm.uid+"/website");
 

@@ -8,7 +8,6 @@
 
     function PageEditController($routeParams, $location, PageService) {
         var vm = this;
-
         vm.uid = parseInt($routeParams['uid']);
         vm.wid = parseInt($routeParams['wid']);
         vm.pid = parseInt($routeParams['pid']);
@@ -29,7 +28,7 @@
         }
 
         function updatePage(name, description) {
-            var updated = {_id: vm.pid, name: name, developerId: vm.uid, description: description};
+            var updated = {_id: vm.pid, name: name, websiteId: vm.wid, description: description};
             PageService.updatePage(vm.pid, updated);
             vm.page = updated;
             $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
