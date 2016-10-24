@@ -23,7 +23,15 @@
         return api;
 
         function createWebsite(userId, website) {
-            //TODO
+            var id = parseInt(Math.random() * 1000);
+            while (findWebsiteById(id)!=null) {
+                id = parseInt(Math.random() * 1000);
+            }
+            website._id = id;
+
+            website.developerId = userId;
+            websites.push(website);
+            return website;
         }
 
         function findWebsitesForUser(userId) {
@@ -39,12 +47,13 @@
         function findWebsiteById(websiteId) {
             for(var w in websites) {
                 console.log(websites[w]._id);
-                if(websites[w]._id === websiteId) {
+                if(websites[w]._id == websiteId) {
                     console.log(websites[w].name);
                     return websites[w];
                 }
             }
-            console.log(websites[w].name);
+            return null;
+
         }
 
         function updateWebsite(websiteId, website) {
