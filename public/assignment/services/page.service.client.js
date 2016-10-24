@@ -20,7 +20,15 @@
         return api;
 
         function createPage(websiteId, page) {
-            //TODO
+            var id = parseInt(Math.random() * 1000);
+            while (findPageById(id)!=null) {
+                id = parseInt(Math.random() * 1000);
+            }
+            page._id = id;
+
+            page.websiteId = websiteId;
+            pages.push(page);
+            return page;
         }
 
         function findPageByWebsiteId(websiteId) {
