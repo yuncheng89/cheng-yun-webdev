@@ -27,5 +27,12 @@
             $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
         }
 
+        function updatePage(name, description) {
+            var updated = {_id: vm.pid, name: name, developerId: vm.uid, description: description};
+            PageService.updatePage(vm.pid, updated);
+            vm.page = updated;
+            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+        }
+
     }
 })();

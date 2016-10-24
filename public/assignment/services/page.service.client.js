@@ -50,7 +50,20 @@
         }
 
         function updatePage(pageId, page) {
-            //TODO
+
+            console.log(pages);
+
+            for(var p in pages) {
+                pageToReplace = pages[p];
+                if(pageToReplace._id == pageId) {
+                    var start_index = p;
+                    var number_of_elements_to_remove = 1;
+                    pages.splice(start_index, number_of_elements_to_remove, page);
+                }
+            }
+
+            console.log(pages);
+            return null;
         }
 
         function deletePage(pageId) {
