@@ -14,6 +14,7 @@
         vm.pid = parseInt($routeParams['pid']);
 
         vm.deletePage = deletePage;
+        vm.updatePage = updatePage;
 
         function init() {
             vm.pages = PageService.findPageByWebsiteId(vm.wid);

@@ -71,7 +71,18 @@
         }
 
         function updateWidget(widgetId, widget) {
-            //TODO
+            console.log(widgets);
+
+            for(var wg in widgets) {
+                widgetToReplace = widgets[wg];
+                if(widgetToReplace._id == widgetId) {
+                    var start_index = wg;
+                    var number_of_elements_to_remove = 1;
+                    widgets.splice(start_index, number_of_elements_to_remove, widget);
+                }
+            }
+
+            console.log(widgets);
             return null;
         }
 
