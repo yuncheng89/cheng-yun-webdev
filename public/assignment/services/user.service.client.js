@@ -3,7 +3,7 @@
         .module("WebAppMaker")
         .factory("UserService", UserService);
 
-    function UserService() {
+    function UserService($http) {
         var users = [
             {_id: 123, username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
             {_id: 234, username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
@@ -27,22 +27,27 @@
                 id = parseInt(Math.random() * 1000);
             }
             user._id = id;
-            users.push(user);
+            //users.push(user);
 
-            console.log(users);
+            return $http.post("/api/user", user);
+
+            //console.log(users);
         }
 
         function findUserById(userId) {
+            var url = "/api/user/"+userId;
+            return $http.get(url);
+
+            /*
             for(var u in users) {
                 user = users[u];
                 if(user._id == userId) {
                     return user;
                 }
             }
-
             console.log(user.username);
-
             return null;
+            */
         }
 
         function findUserByUsername(username) {
@@ -56,14 +61,17 @@
         }
 
         function findUserByCredentials(username, password) {
-            for(var u in users) {
-                user = users[u];
-                if(    user.username === username
-                    && user.password === password) {
-                    return user;
-                }
-            }
-            return null;
+            var url = '/api/user?username='+username+'&password='+password;
+            return $http.get(url);
+
+            // for(var u in users) {
+            //     user = users[u];
+            //     if(    user.username === username
+            //         && user.password === password) {
+            //         return user;
+            //     }
+            // }
+            // return null;
         }
 
         function updateUser(userId, user) {

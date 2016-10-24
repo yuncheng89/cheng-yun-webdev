@@ -8,7 +8,16 @@
 
         vm.uid = parseInt($routeParams.uid);
 
-        vm.user = UserService.findUserById(vm.uid);
+        UserService
+            .findUserById(vm.uid)
+            .success(function(user) {
+                if (user != '0') {
+                    vm.user = user;
+                }
+            })
+            .error(function() {
+
+            });
 
         vm.updateUser = updateUser;
 

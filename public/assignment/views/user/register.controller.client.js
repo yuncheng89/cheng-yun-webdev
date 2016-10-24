@@ -10,12 +10,16 @@
         function register(username, password) {
 
             var user = {username: username, password: password};
-            UserService.createUser(user);
+            UserService
+                .createUser(user)
+                .success(function(user) {
+                    $location.url("/user/" + user._id);
+                    vm.user = user;
+                    console.log(user);
+                })
+                .error(function(error) {
 
-            vm.user = user;
-            console.log(user);
-
-            $location.url("/user/" + user._id);
+                })
         }
     }
 })();

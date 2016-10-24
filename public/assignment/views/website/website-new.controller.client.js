@@ -18,12 +18,8 @@
 
         init();
 
-        function createWebsite(name, description) {
-            var newWebsite = new Object();
-            newWebsite.name = name;
-            newWebsite.description = description;
-
-            WebsiteService.createWebsite(vm.uid, newWebsite);
+        function createWebsite(website) {
+            WebsiteService.createWebsite(vm.uid, website);
             $location.url("/user/"+vm.uid+"/website");
         }
     }
