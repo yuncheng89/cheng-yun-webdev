@@ -22,6 +22,11 @@
         return api;
 
         function createUser(user) {
+            var id = parseInt(Math.random() * 1000);
+            while (findUserById(id)!=null) {
+                id = parseInt(Math.random() * 1000);
+            }
+            user._id = id;
             users.push(user);
 
             console.log(users);
@@ -30,7 +35,7 @@
         function findUserById(userId) {
             for(var u in users) {
                 user = users[u];
-                if(user._id === userId) {
+                if(user._id == userId) {
                     return user;
                 }
             }
