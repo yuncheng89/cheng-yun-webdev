@@ -52,7 +52,14 @@
         }
 
         function deleteWebsite(websiteId) {
-            //TODO
+            var website = findWebsiteById(websiteId);
+            var index = websites.indexOf(website);
+
+            console.log("Website to be deleted is at index "+index);
+
+            if (index > -1) {
+                websites.splice(index, 1);
+            }
         }
 
     }

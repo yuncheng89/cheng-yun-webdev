@@ -7,20 +7,27 @@
         .module("WebAppMaker")
         .controller("WebsiteEditController", WebsiteEditController);
 
-    function WebsiteEditController($routeParams, WebsiteService, UserService) {
+    function WebsiteEditController($routeParams, $location, WebsiteService, UserService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        var websiteId = parseInt($routeParams['wid']);
-        console.log("websiteId:", websiteId);
+        vm.uid = parseInt($routeParams['uid']);
+        vm.wid = parseInt($routeParams['wid']);
+        console.log("websiteId:", vm.wid);
+
+        vm.deleteWebsite  = deleteWebsite;
 
         function init() {
-            vm.user = UserService.findUserById(userId);
-            vm.websites = WebsiteService.findWebsitesForUser(userId);
-
-            vm.website = WebsiteService.findWebsiteById(websiteId);
+            vm.user = UserService.findUserById(vm.uid);
+            vm.websites = WebsiteService.findWebsitesForUser(vm.uid);
+            vm.website = WebsiteService.findWebsiteById(vm.wid);
         }
 
         init();
+
+        function deleteWebsite() {
+            console.log("Delete website "+vm.wid);
+            WebsiteService.deleteWebsite(vm.wid);
+            $location.url("/user/"+vm.uid+"/website");
+        }
     }
 
 })();
