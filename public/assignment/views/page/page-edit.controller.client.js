@@ -16,22 +16,36 @@
         vm.updatePage = updatePage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
-            vm.page = PageService.findPageById(vm.pid);
+            PageService
+                .findAllPagesForWebsite(vm.wid)
+                .success(function(pages) {
+                    vm.pages = pages;
+                });
+
+            PageService
+                .findPageById(vm.pid)
+                .success(function(page) {
+                    vm.page = page;
+                    console.log(vm.page);
+                });
         }
         init();
 
         function deletePage() {
             console.log("Delete page "+vm.pid);
-            PageService.deletePage(vm.pid);
-            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+            PageService
+                .deletePage(vm.pid)
+                .success(function() {
+                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+                });
         }
 
-        function updatePage(name, description) {
-            var updated = {_id: vm.pid, name: name, websiteId: vm.wid, description: description};
-            PageService.updatePage(vm.pid, updated);
-            vm.page = updated;
-            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+        function updatePage() {
+            PageService
+                .updatePage(vm.page)
+                .success(function() {
+                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+                });
         }
 
     }

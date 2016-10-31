@@ -7,7 +7,7 @@
         .module("WebAppMaker")
         .controller("WebsiteEditController", WebsiteEditController);
 
-    function WebsiteEditController($routeParams, $location, WebsiteService, UserService) {
+    function WebsiteEditController($routeParams, $location, WebsiteService) {
         var vm = this;
         vm.uid = parseInt($routeParams['uid']);
         vm.wid = parseInt($routeParams['wid']);
@@ -17,24 +17,36 @@
         vm.updateWebsite = updateWebsite;
 
         function init() {
-            vm.user = UserService.findUserById(vm.uid);
-            vm.websites = WebsiteService.findWebsitesForUser(vm.uid);
-            vm.website = WebsiteService.findWebsiteById(vm.wid);
+
+            WebsiteService
+                .findWebsitesForUser(vm.uid)
+                .success(function (websites) {
+                    vm.websites = websites;
+                });
+
+            WebsiteService
+                .findWebsiteById(vm.wid)
+                .success(function (website) {
+                    vm.website = website;
+                });
         }
         init();
 
         function deleteWebsite() {
             console.log("Delete website "+vm.wid);
-            WebsiteService.deleteWebsite(vm.wid);
-            $location.url("/user/"+vm.uid+"/website");
+            WebsiteService
+                .deleteWebsite(vm.wid)
+                .success(function() {
+                    $location.url("/user/"+vm.uid+"/website");
+                });
         }
 
-        function updateWebsite(name, description) {
-            var updated = {_id: vm.wid, name: name, developerId: vm.uid, description: description};
-            WebsiteService.updateWebsite(vm.wid, updated);
-            vm.website = updated;
-            $location.url("/user/"+vm.uid+"/website");
-
+        function updateWebsite() {
+            WebsiteService
+                .updateWebsite(vm.website)
+                .success(function () {
+                    $location.url("/user/" + vm.uid + "/website");
+                });
         }
     }
 

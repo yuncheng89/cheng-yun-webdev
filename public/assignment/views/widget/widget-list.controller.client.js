@@ -18,6 +18,11 @@
 
         function init() {
             vm.widgets = WidgetService.findWidgetsByPageId(vm.pid);
+            // var widgets = $(".wam-widgets")
+            //     .sortable({
+            //         axis: 'y'
+            //     });
+            // console.log(widgets);
         }
         init();
 

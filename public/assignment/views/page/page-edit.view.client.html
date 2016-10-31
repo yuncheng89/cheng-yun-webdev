@@ -19,7 +19,7 @@
         </div>
         <div class="col-sm-8">
             <div class="navbar-text pull-right">
-                <a ng-click="model.updatePage(model.page.name, model.page.description)">
+                <a ng-click="model.updatePage()">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
@@ -65,7 +65,7 @@
             </div>
         </form>
 
-        <a ng-click="model.deletePage(model.page._id)"
+        <a ng-click="model.deletePage()"
            class="btn btn-danger btn-block">Delete</a>
 
     </div>

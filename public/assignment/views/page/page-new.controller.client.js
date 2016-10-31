@@ -15,17 +15,22 @@
         vm.createPage = createPage;
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
+            PageService
+                .findAllPagesForWebsite(vm.wid)
+                .success(function(pages) {
+                    vm.pages = pages;
+                });
         }
         init();
 
-        function createPage(name, description) {
-            var newPage = new Object();
-            newPage.name = name;
-            newPage.description = description;
-
-            PageService.createPage(vm.uid, newPage);
-            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+        function createPage(page) {
+            page._id = (new Date()).getTime();
+            page.websiteId = vm.wid;
+            PageService
+                .createPage(vm.wid, page)
+                .success(function() {
+                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+                });
         }
 
     }

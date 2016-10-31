@@ -3,15 +3,15 @@
     <input type="text"
            class="form-control"
            placeholder="username"
-           ng-model="model.user.username"/>
+           ng-model="username"/>
     <input type="password"
            class="form-control"
            placeholder="password"/>
     <input type="password"
            class="form-control"
            placeholder="verify password"
-           ng-model="model.user.password"/>
+           ng-model="password"/>
 
-    <a ng-click="model.register(model.user.username, model.user.password)" class="btn btn-primary btn-block">Register</a>
+    <a ng-click="model.register(username, password)" class="btn btn-primary btn-block">Register</a>
     <a class="btn btn-danger  btn-block" href="#/login">Cancel</a>
 </div>

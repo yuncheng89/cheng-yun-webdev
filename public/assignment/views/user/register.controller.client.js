@@ -9,9 +9,12 @@
 
         function register(username, password) {
 
-            var user = {username: username, password: password};
+            console.log([username, password]);
+
+            //TODO: check if username is already taken
+
             UserService
-                .createUser(user)
+                .createUser(username, password)
                 .success(function(user) {
                     $location.url("/user/" + user._id);
                     vm.user = user;

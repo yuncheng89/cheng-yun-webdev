@@ -8,19 +8,31 @@
 
     function WebsiteNewController($routeParams, WebsiteService, $location) {
         var vm = this;
+
         vm.uid = parseInt($routeParams['uid']);
 
         vm.createWebsite = createWebsite;
 
         function init() {
-            vm.websites = WebsiteService.findWebsitesForUser(vm.uid);
+            WebsiteService
+                .findWebsitesForUser(vm.uid)
+                .success(function (websites) {
+                    vm.websites = websites;
+                });
+
+            console.log(vm.websites);
         }
 
         init();
 
         function createWebsite(website) {
-            WebsiteService.createWebsite(vm.uid, website);
-            $location.url("/user/"+vm.uid+"/website");
+            website._id = (new Date()).getTime();
+            website.developerId = vm.uid;
+            WebsiteService
+                .createWebsite(vm.uid, website)
+                .success(function () {
+                    $location.url("/user/"+vm.uid+"/website");
+                });
         }
     }
 })();

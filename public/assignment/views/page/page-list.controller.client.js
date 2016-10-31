@@ -1,6 +1,3 @@
-/**
- * Created by macbook on 10/20/16.
- */
 (function(){
     angular
         .module("WebAppMaker")
@@ -13,8 +10,11 @@
         vm.wid = parseInt($routeParams['wid']);
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteId(vm.wid);
-
+            PageService
+                .findAllPagesForWebsite(vm.wid)
+                .success(function(pages) {
+                    vm.pages = pages;
+                });
         }
         init();
 
