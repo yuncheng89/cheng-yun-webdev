@@ -26,7 +26,7 @@ module.exports = function(app) {
     app.put("/api/widget/:widgetId", updateWidget);
     app.delete("/api/widget/:widgetId", deleteWidget);
 
-    app.post ("/api/uploads", upload.single('myFile'), uploadImage);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 
     function createWidget(req, res) {
@@ -93,6 +93,8 @@ module.exports = function(app) {
         var destination   = myFile.destination;  // folder where file is saved to
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
+
+        console.log("widgetId ", widgetId);
 
         res.send(myFile);
 
