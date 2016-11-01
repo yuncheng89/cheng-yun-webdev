@@ -65,7 +65,6 @@ module.exports = function(app) {
             }
         }
         console.log(pages);
-        return null;
     }
 
 

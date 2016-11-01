@@ -17,15 +17,25 @@
         vm.wgid = $routeParams.wgid;
 
         function init() {
-            vm.widget = WidgetService.findWidgetById(vm.wgid);
+
         }
         init();
 
         function createWidget(widgetType) {
-            console.log(widgetType);
-            var widget = WidgetService.createWidget(vm.pid, widgetType);
-            console.log(widget.widgetType);
-            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/" + widget._id);
+            var newWidget = new Object();
+            newWidget._id = (new Date()).getTime();
+            newWidget.pageId = vm.pid;
+            newWidget.widgetType = widgetType;
+
+            //dummy values
+            newWidget.text = "Enter widget text here";
+            newWidget.size = 4;
+
+            WidgetService
+                .createWidget(vm.pid, newWidget)
+                .success(function() {
+                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/" + newWidget._id);
+                });
         }
 
     }
