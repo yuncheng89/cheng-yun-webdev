@@ -5,7 +5,19 @@ module.exports = function(app) {
     console.log("Hello from widget services on server");
 
     var multer = require('multer'); // npm install multer --save
-    var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
+    var mime = require('mime');
+
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname+'/../../public/assignment/uploads')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype));
+        }
+    });
+    var upload = multer({ storage: storage });
+
+    //var upload = multer({ dest: __dirname+'/../../public/assignment/uploads' });
 
     var widgets = [
         { "_id": 123, "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
@@ -16,7 +28,7 @@ module.exports = function(app) {
         { "_id": 567, "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
         { "_id": 678, "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
             "url": "https://youtu.be/AM2Ivdi9c4E" },
-        { "_id": 789, "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
+        { "_id": 789, "widgetType": "HTML", "pageId": "321", "text": "<p><i>Lorem ipsum</p>"}
     ];
 
 
@@ -83,9 +95,12 @@ module.exports = function(app) {
 
     function uploadImage(req, res) {
 
+        var myFile        = req.file;
         var widgetId      = req.body.widgetId;
         var width         = req.body.width;
-        var myFile        = req.file;
+        var developerId   = req.body.developerId;
+        var websiteId     = req.body.websiteId;
+        var pageId        = req.body.pageId;
 
         var originalname  = myFile.originalname; // file name on user's computer
         var filename      = myFile.filename;     // new file name in uploads folder
@@ -94,10 +109,23 @@ module.exports = function(app) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
+        //res.send(myFile);
+
+        var url = "/assignment/uploads/"+myFile.filename;
+
         console.log("widgetId ", widgetId);
+        console.log("withExt ", url);
 
-        res.send(myFile);
+        for(var w in widgets) {
+            if (widgets[w]._id == widgetId) {
+                widgets[w].width = width;
+                widgets[w].url = url;
+                res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
+            }
+        }
 
+        //res.redirect("/assignment/index.html#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+        res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
     }
 
 };
