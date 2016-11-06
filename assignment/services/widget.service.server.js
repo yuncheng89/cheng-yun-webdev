@@ -120,11 +120,11 @@ module.exports = function(app) {
             if (widgets[w]._id == widgetId) {
                 widgets[w].width = width;
                 widgets[w].url = url;
-                res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
+                res.redirect("/assignment/index.html#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+                return;
             }
         }
 
-        //res.redirect("/assignment/index.html#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
         res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
     }
 

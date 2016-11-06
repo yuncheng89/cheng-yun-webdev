@@ -23,7 +23,7 @@
 
 
     <div class="container-fluid">
-        <div class="form-class">
+        <div ng-if="model.widget.widgetType">
             <div ng-include="'views/widget/widget-'+model.widget.widgetType.toLowerCase()+'.view.client.html'"></div>
             <p></p>
             <a ng-click="model.deleteWidget(model.widget._id)"
