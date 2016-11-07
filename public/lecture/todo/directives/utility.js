@@ -1,13 +1,10 @@
-/**
- * Created by macbook on 10/31/16.
- */
-(function () {
+(function() {
     angular
-        .module("wamDirectives", [])
-        .directive("wamSortable", wamSortable); //wam-sortable
+        .module("utility", [])
+        .directive("sortable", sortable);
 
-    function wamSortable() {
-        console.log("Hello from wamSortable");
+    function sortable() {
+        console.log("Hello from sortable");
 
         function linker(scope, element, attributes) {
             var start = -1;
@@ -35,16 +32,14 @@
         }
     }
 
-    function sortableController(WidgetService, $routeParams) {
+    function sortableController(TodoService) {
         var vm = this;
         vm.sort = sort;
-        vm.pid = parseInt($routeParams['pid']);
 
         function sort(start, end) {
-            WidgetService.sort(vm.pid, start, end);
+            console.log([start, end]);
+            TodoService.sort(start, end);
         }
-
-
-
     }
+
 })();

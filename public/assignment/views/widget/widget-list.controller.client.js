@@ -23,6 +23,7 @@
                     vm.widgets = widgets;
                 });
 
+            //The code below would make angular and jquery clash:
             // var widgets = $(".wam-widgets")
             //     .sortable({
             //         axis: 'y'

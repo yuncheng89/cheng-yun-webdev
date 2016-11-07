@@ -39,6 +39,7 @@ module.exports = function(app) {
     app.delete("/api/widget/:widgetId", deleteWidget);
 
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
+    app.put("/api/page/:pageId/widget", sortWidgets);
 
 
     function createWidget(req, res) {
@@ -128,4 +129,36 @@ module.exports = function(app) {
         res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
     }
 
+
+    function sortWidgets(req, res) {
+        var pageId = req.params.pageId;
+        var widgetsForPage = [];
+
+        var i = widgets.length;
+        while (i--) {
+            if(widgets[i].pageId == pageId) {
+                widgetsForPage.push(widgets[i]); //add to widgets for page array
+                widgets.splice(i, 1); //remove from main widgets array
+            }
+        }
+
+        widgetsForPage.reverse();
+
+        console.log(widgetsForPage);
+
+        var start = req.query.initial;
+        var end = req.query.final;
+
+        console.log([start, end]);
+        console.log("=====================================================================================");
+
+        widgetsForPage.splice(end, 0, widgetsForPage.splice(start, 1)[0]);
+
+        var concatenated = widgets.concat(widgetsForPage);
+        widgets = concatenated;
+
+        //widgets.push(widgetsForPage); //push back to main widgets array
+
+        console.log(widgets);
+    }
 };
