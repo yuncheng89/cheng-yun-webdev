@@ -41,9 +41,8 @@
             </div>
 
 
-            <div ng-switch-when="YOUTUBE">
-                <iframe width="560" height="315"
-                        ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
+            <div ng-switch-when="YOUTUBE" class="youtube-widget">
+                <iframe ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
                         frameborder="0" allowfullscreen></iframe>
             </div>
 
