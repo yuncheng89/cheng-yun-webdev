@@ -1,9 +1,18 @@
 <form>
     <div class="form-group">
-        <label for="html">HTML</label>
-        <input id="html"
-               ng-model="model.widget.text"
+        <label for="name">Name</label>
+        <input id="name"
+               ng-model="model.widget.name"
                type="text" class="form-control"
-               placeholder="Text" value="{{model.widget.text}}">
+               placeholder="Text" value="{{model.widget.name}}">
+
+        <label for="html">Name</label>
+        <div id="html"
+             ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+        </div>
     </div>
 </form>
