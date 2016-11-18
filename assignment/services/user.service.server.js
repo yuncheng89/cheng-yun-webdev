@@ -31,7 +31,7 @@ module.exports = function(app, model) {
                     res.send(newUser);
                 },
                 function(error) {
-                    res.sendStatus(404).send(error);
+                    res.sendStatus(400).send(error);
                 }
             );
     }
@@ -81,14 +81,23 @@ module.exports = function(app, model) {
 
 
     function findUserById(req, res) {
-        var userId = parseInt(req.params.uid);
-        for (var u in users) {
-            if (users[u]._id == userId) {
-                res.send(users[u]);
-                return;
-            }
-        }
-        res.send('0');
+        var userId = req.params.uid;
+        model
+            .userModel
+            .findUserById(userId)
+            .then(
+                function(user) {
+                    if (user) {
+                        res.send(user);
+                    } else {
+                        res.send('0');
+                    }
+                },
+                function(error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+
     }
 
 

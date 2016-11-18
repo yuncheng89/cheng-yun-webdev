@@ -56,10 +56,10 @@ module.exports = function () {
 
     function findUserById(userId) {
         // UserModel.find({_id: userId}) --> returns an array
-        return UserModel.findById(userId);
+        return UserModel.findById(userId); //returns a promise
     }
 
     function createUser(user) {
-        return UserModel.create(user);
+        return UserModel.create(user); //returns a promise
     }
 };
