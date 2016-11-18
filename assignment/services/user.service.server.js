@@ -1,7 +1,7 @@
 /**
  * Created by macbook on 10/24/16.
  */
-module.exports = function(app) {
+module.exports = function(app, model) {
     console.log("Hello from user services on server");
 
     var users = [
@@ -19,10 +19,21 @@ module.exports = function(app) {
 
     function createUser(req, res) {
         var user = req.body;
-        user._id = (new Date()).getTime();
-        console.log("Create new user: ", user._id);
-        users.push(user);
-        res.send(user);
+        // user._id = (new Date()).getTime();
+        // console.log("Create new user: ", user._id);
+        // users.push(user);
+
+        model
+            .userModel
+            .createUser(user)
+            .then(
+                function(newUser) {
+                    res.send(newUser);
+                },
+                function(error) {
+                    res.sendStatus(404).send(error);
+                }
+            );
     }
 
     function findUser(req, res) {

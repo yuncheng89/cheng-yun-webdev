@@ -19,7 +19,7 @@
             var user = {
                 username: username,
                 password: password
-            }
+            };
 
             return $http.post("/api/user", user);
         }
