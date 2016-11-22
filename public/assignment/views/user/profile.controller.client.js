@@ -9,37 +9,33 @@
         var userId = $routeParams.uid;
 
         vm.updateUser = updateUser;
-        vm.deleteUser = deleteUser;
+        vm.unregisterUser = unregisterUser;
 
         function init() {
             UserService
                 .findUserById(userId)
-                .success(function(user) {
-                    if (user != '0') {
+                .success(function(user){
+                    if(user != '0') {
                         vm.user = user;
                     }
                 })
-                .error(function() {
+                .error(function(){
 
                 });
         }
         init();
 
         function updateUser() {
-            UserService
-                .updateUser(vm.user)
-                .success(function() {
-
-                });
+            UserService.updateUser(vm.user);
         }
 
-        function deleteUser() {
+        function unregisterUser() {
             UserService
-                .deleteUser(vm.user._id)
-                .success(function() {
+                .unregisterUser(vm.user._id)
+                .success(function(){
                     $location.url("/login");
                 })
-                .error(function() {
+                .error(function(){
 
                 });
         }

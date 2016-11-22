@@ -1,6 +1,3 @@
-/**
- * Created by macbook on 11/14/16.
- */
 module.exports = function() {
     var mongoose = require("mongoose");
 

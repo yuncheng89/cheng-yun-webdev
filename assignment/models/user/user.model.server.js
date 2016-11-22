@@ -1,7 +1,3 @@
-/**
- * Created by macbook on 11/14/16.
- */
-
 module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
@@ -42,7 +38,7 @@ module.exports = function () {
     }
 
     function updateUser(userId, user) {
-        return UserModel
+        return UserModel //return promise
             .update(
                 {
                     _id: userId
