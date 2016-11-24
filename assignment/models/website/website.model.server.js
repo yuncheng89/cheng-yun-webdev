@@ -7,6 +7,7 @@ module.exports = function () {
         createWebsite: createWebsite,
         findWebsitesForUser: findWebsitesForUser,
         findWebsiteById: findWebsiteById,
+        findAllPagesForWebsite: findAllPagesForWebsite,
         updateWebsite: updateWebsite,
         deleteWebsite: deleteWebsite,
         setModel: setModel
@@ -32,6 +33,13 @@ module.exports = function () {
                     description: website.description
                 }
             );
+    }
+
+    function findAllPagesForWebsite(websiteId) { //returns website object with pages
+        return WebsiteModel
+            .findById(websiteId)
+            .populate("pages", "name") //just want names of pages from db
+            .exec();
     }
 
     function findWebsiteById(websiteId) {

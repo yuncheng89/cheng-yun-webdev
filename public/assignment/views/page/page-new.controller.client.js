@@ -17,15 +17,13 @@
         function init() {
             PageService
                 .findAllPagesForWebsite(vm.wid)
-                .success(function(pages) {
-                    vm.pages = pages;
+                .success(function(website) {
+                    vm.pages = website.pages;
                 });
         }
         init();
 
         function createPage(page) {
-            page._id = (new Date()).getTime();
-            page.websiteId = vm.wid;
             PageService
                 .createPage(vm.wid, page)
                 .success(function() {

@@ -19,7 +19,7 @@ module.exports = function () {
         model = _model;
     }
 
-    function findWebsitesForUser(userId) {
+    function findWebsitesForUser(userId) { //returns user object with websites
         return UserModel
             .findById(userId)
             .populate("websites", "name") //just want names of websites from db

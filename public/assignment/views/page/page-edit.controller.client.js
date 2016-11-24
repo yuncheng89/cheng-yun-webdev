@@ -18,8 +18,8 @@
         function init() {
             PageService
                 .findAllPagesForWebsite(vm.wid)
-                .success(function(pages) {
-                    vm.pages = pages;
+                .success(function(website) {
+                    vm.pages = website.pages;
                 });
 
             PageService
