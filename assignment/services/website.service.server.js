@@ -49,32 +49,43 @@ module.exports = function(app, model) {
 
     function findWebsiteById(req, res) {
         var websiteId = req.params.websiteId;
-        for(var w in websites) {
-            if(websites[w]._id == websiteId) {
-                res.json(websites[w]);
-            }
-        }
+
+        model.websiteModel
+            .findWebsiteById(websiteId)
+            .then(function(website) {
+                res.json(website)
+            });
     }
 
     function deleteWebsite(req, res) {
         var websiteId = req.params.websiteId;
-        for (var w in websites) {
-            if (websites[w]._id == websiteId) {
-                websites.splice(w, 1);
-                res.send(200);
-            }
-        }
+        model
+            .websiteModel
+            .deleteWebsite(websiteId)
+            .then(
+                function (status) {
+                    res.send(200);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
     function updateWebsite(req, res) {
         var website = req.body; //Get from payload
         var websiteId = req.params.websiteId;
-        for(var w in websites) {
-            if (websites[w]._id == websiteId) {
-                websites[w] = website;
-                res.send(200);
-            }
-        }
+
+        model.websiteModel
+            .updateWebsite(websiteId, website)
+            .then(
+                function (status) {
+                    res.send(200);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
 };

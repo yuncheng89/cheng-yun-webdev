@@ -6,15 +6,42 @@ module.exports = function () {
     var api = {
         createWebsite: createWebsite,
         findWebsitesForUser: findWebsitesForUser,
+        findWebsiteById: findWebsiteById,
+        updateWebsite: updateWebsite,
+        deleteWebsite: deleteWebsite,
         setModel: setModel
     };
     return api;
     function setModel(_model) {
         model = _model;
     }
+
+    function deleteWebsite(websiteId) {
+        return WebsiteModel
+            .remove({_id: websiteId});
+    }
+
+    function updateWebsite(websiteId, website) {
+        return WebsiteModel //return promise
+            .update(
+                {
+                    _id: websiteId
+                },
+                {
+                    name: website.name,
+                    description: website.description
+                }
+            );
+    }
+
+    function findWebsiteById(websiteId) {
+        return WebsiteModel.findById(websiteId);
+    }
+
     function findWebsitesForUser(userId) {
         return model.userModel.findWebsitesForUser(userId);
     }
+
     function createWebsite(userId, website) {
         return WebsiteModel
             .create(website)

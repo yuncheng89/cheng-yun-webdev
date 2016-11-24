@@ -103,15 +103,8 @@ module.exports = function(app, model) {
                     res.sendStatus(400).send(error);
                 }
             );
-        // for(var u in users) {
-        //     if(users[u].username === username &&
-        //        users[u].password === password) {
-        //         res.send(users[u]);
-        //         return;
-        //     }
-        // }
-        // res.send('0');
     }
+
     function findUserByUsername(req, res) {
         var username = req.query.username;
         model
@@ -119,7 +112,7 @@ module.exports = function(app, model) {
             .findUserByUsername(username)
             .then(
                 function (users) {
-                    if(users) {
+                    if(users.length===1) {
                         res.json(users[0]);
                     } else {
                         res.send('0');

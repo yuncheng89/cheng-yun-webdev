@@ -11,7 +11,7 @@
             findWebsiteById: findWebsiteById,
             createWebsite: createWebsite,
             updateWebsite: updateWebsite,
-            removeWebsite: removeWebsite
+            deleteWebsite: deleteWebsite
         };
         return api;
 
@@ -35,7 +35,7 @@
             return $http.put(url, website);
         }
 
-        function removeWebsite(websiteId) {
+        function deleteWebsite(websiteId) {
             var url = "/api/website/"+websiteId;
             return $http.delete(url);
         }
