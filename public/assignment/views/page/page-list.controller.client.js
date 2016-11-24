@@ -6,8 +6,8 @@
     function PageListController($routeParams, PageService) {
         var vm = this;
 
-        vm.uid = parseInt($routeParams['uid']);
-        vm.wid = parseInt($routeParams['wid']);
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
 
         function init() {
             PageService

@@ -8,6 +8,7 @@ module.exports = function () {
         createUser: createUser,
         findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
+        findUserByUsername: findUserByUsername,
         findWebsitesForUser: findWebsitesForUser,
         updateUser: updateUser,
         removeUser: removeUser,
@@ -21,7 +22,7 @@ module.exports = function () {
     function findWebsitesForUser(userId) {
         return UserModel
             .findById(userId)
-            .populate("websites", "name")
+            .populate("websites", "name") //just want names of websites from db
             .exec();
     }
 
@@ -30,10 +31,17 @@ module.exports = function () {
             .remove({_id: userId});
     }
 
+
     function findUserByCredentials(username, password) {
         return UserModel.find({
-            username: username,
-            password: password
+                    username: username,
+                    password: password
+                });
+    }
+
+    function findUserByUsername(username) {
+        return UserModel.find({
+            username: username
         });
     }
 

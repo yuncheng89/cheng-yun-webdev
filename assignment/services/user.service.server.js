@@ -28,7 +28,7 @@ module.exports = function(app, model) {
                 function (error) {
                     res.sendStatus(400).send(error);
                 }
-            )
+            );
         // for(var u in users) {
         //     if(users[u]._id == uid) {
         //         users.splice(u, 1);
@@ -77,7 +77,6 @@ module.exports = function(app, model) {
     }
 
     function findUser(req, res) {
-        var params = req.params;
         var query = req.query;
         if(query.password && query.username) {
             findUserByCredentials(req, res);
@@ -94,9 +93,9 @@ module.exports = function(app, model) {
             .findUserByCredentials(username, password)
             .then(
                 function (users) {
-                    if(users) {
+                    if(users.length===1) { //found one user
                         res.json(users[0]);
-                    } else {
+                    } else { //found zero users
                         res.send('0');
                     }
                 },
@@ -115,13 +114,21 @@ module.exports = function(app, model) {
     }
     function findUserByUsername(req, res) {
         var username = req.query.username;
-        for(var u in users) {
-            if(users[u].username === username) {
-                res.send(users[u]);
-                return;
-            }
-        }
-        res.send('0');
+        model
+            .userModel
+            .findUserByUsername(username)
+            .then(
+                function (users) {
+                    if(users) {
+                        res.json(users[0]);
+                    } else {
+                        res.send('0');
+                    }
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
     function findUserById(req, res) {
         var userId = req.params.uid;

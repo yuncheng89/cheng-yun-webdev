@@ -9,8 +9,8 @@
 
     function WebsiteEditController($routeParams, $location, WebsiteService) {
         var vm = this;
-        vm.uid = parseInt($routeParams['uid']);
-        vm.wid = parseInt($routeParams['wid']);
+        vm.uid = $routeParams['uid'];
+        vm.wid = $routeParams['wid'];
         console.log("websiteId:", vm.wid);
 
         vm.deleteWebsite  = deleteWebsite;
@@ -20,8 +20,8 @@
 
             WebsiteService
                 .findWebsitesForUser(vm.uid)
-                .success(function (websites) {
-                    vm.websites = websites;
+                .success(function(user){
+                    vm.websites = user.websites;
                 });
 
             WebsiteService

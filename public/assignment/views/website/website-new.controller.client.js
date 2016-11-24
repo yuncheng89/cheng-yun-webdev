@@ -9,15 +9,15 @@
     function WebsiteNewController($routeParams, WebsiteService, $location) {
         var vm = this;
 
-        vm.uid = parseInt($routeParams['uid']);
+        vm.uid = $routeParams['uid'];
 
         vm.createWebsite = createWebsite;
 
         function init() {
             WebsiteService
                 .findWebsitesForUser(vm.uid)
-                .success(function (websites) {
-                    vm.websites = websites;
+                .success(function(user){
+                    vm.websites = user.websites;
                 });
 
             console.log(vm.websites);
@@ -26,8 +26,6 @@
         init();
 
         function createWebsite(website) {
-            website._id = (new Date()).getTime();
-            website.developerId = vm.uid;
             WebsiteService
                 .createWebsite(vm.uid, website)
                 .success(function () {

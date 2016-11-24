@@ -1,7 +1,3 @@
-/**
- * Created by macbook on 10/24/16.
- */
-
 module.exports = function(app) {
 
     var model = require("./models/model.server")();

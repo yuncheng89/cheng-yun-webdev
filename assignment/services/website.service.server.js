@@ -1,7 +1,7 @@
 /**
  * Created by macbook on 10/31/16.
  */
-module.exports = function(app) {
+module.exports = function(app, model) {
     console.log("Hello from website services on server");
 
     var websites = [
@@ -22,20 +22,29 @@ module.exports = function(app) {
 
     function createWebsite(req, res) {
         var website = req.body;
-        websites.push(website);
-        console.log(websites);
-        res.send(websites);
+        var uid = req.params.uid;
+        // websites.push(website);
+        // console.log(websites);
+        // res.send(websites);
+
+        model.websiteModel
+            .createWebsite(uid, website)
+            .then(function (website) {
+                console.log(website);
+                res.json(website);
+            });
+
     }
 
     function findAllWebsitesForUser(req, res) {
         var uid = req.params.uid;
-        var result = [];
-        for(var w in websites) {
-            if(websites[w].developerId == uid) {
-                result.push(websites[w]);
-            }
-        }
-        res.json(result);
+
+        model.websiteModel
+            .findWebsitesForUser(uid)
+            .then(function(websites) {
+                res.json(websites);
+            });
+
     }
 
     function findWebsiteById(req, res) {
