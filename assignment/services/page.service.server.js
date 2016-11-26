@@ -35,7 +35,7 @@ module.exports = function(app, model) {
         model.pageModel
             .createPage(websiteId, page)
             .then(function (page) {
-                console.log(page);
+                console.log("website or page?", page);
                 res.json(page);
             });
     }

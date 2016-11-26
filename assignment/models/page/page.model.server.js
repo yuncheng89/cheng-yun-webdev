@@ -8,6 +8,7 @@ module.exports = function () {
         createPage: createPage,
         findAllPagesForWebsite: findAllPagesForWebsite,
         findPageById: findPageById,
+        findAllWidgetsForPage: findAllWidgetsForPage,
         updatePage: updatePage,
         deletePage: deletePage,
         setModel: setModel
@@ -29,7 +30,7 @@ module.exports = function () {
                         pageObj._website = websiteObj._id;
                         pageObj.save();
                         websiteObj.pages.push(pageObj);
-                        return websiteObj.save();
+                        return websiteObj.save(); //return the WEBSITE object
                     }, function(error){
                         console.log(error);
                     });
@@ -38,6 +39,14 @@ module.exports = function () {
     function findAllPagesForWebsite(websiteId) {
         return model.websiteModel.findAllPagesForWebsite(websiteId);
     }
+
+    function findAllWidgetsForPage(pageId) { //returns page object with widgets
+        return PageModel
+            .findById(pageId)
+            .populate("widgets")
+            .exec();
+    }
+
     function findPageById(pageId) {
         return PageModel.findById(pageId);
     }

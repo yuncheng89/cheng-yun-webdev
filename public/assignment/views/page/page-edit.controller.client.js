@@ -26,7 +26,7 @@
                 .findPageById(vm.pid)
                 .success(function(page) {
                     vm.page = page;
-                    console.log(vm.page);
+                    console.log("found page by id: "+vm.page);
                 });
         }
         init();

@@ -11,7 +11,7 @@
         function init() {
             WebsiteService
                 .findWebsitesForUser(vm.uid)
-                .success(function(user){
+                .success(function(user){ //Gets USER object in return
                     vm.websites = user.websites;
                 });
         }

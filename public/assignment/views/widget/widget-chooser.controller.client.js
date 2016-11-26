@@ -8,7 +8,7 @@
         .controller("WidgetChooserController", WidgetChooserController);
 
     function WidgetChooserController($routeParams, $location,
-                                  WidgetService, $sce) {
+                                  WidgetService) {
         var vm = this;
         vm.createWidget = createWidget;
         vm.uid = $routeParams.uid;
@@ -22,19 +22,21 @@
         init();
 
         function createWidget(widgetType) {
-            var newWidget = new Object();
-            newWidget._id = (new Date()).getTime();
-            newWidget.pageId = vm.pid;
-            newWidget.widgetType = widgetType;
-
-            //dummy values
-            newWidget.text = "Enter widget text here";
-            newWidget.size = 4;
+            var newWidget = {
+                widgetType: widgetType
+            };
+            //
+            // //dummy values
+            // newWidget.text = "Enter widget text here";
+            // newWidget.size = 4;
 
             WidgetService
                 .createWidget(vm.pid, newWidget)
-                .success(function() {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/" + newWidget._id);
+                .success(function(addedWidget) { //Gets newly created WIDGET object from db in return
+
+                    console.log("newly created widget's id: "+addedWidget._id);
+
+                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+addedWidget._id);
                 });
         }
 

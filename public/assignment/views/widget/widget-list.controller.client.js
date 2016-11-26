@@ -19,8 +19,8 @@
         function init() {
             WidgetService
                 .findAllWidgetsForPage(vm.pid)
-                .success(function(widgets) {
-                    vm.widgets = widgets;
+                .success(function(page) {
+                    vm.widgets = page.widgets;
                 });
 
             //The code below would make angular and jquery clash:

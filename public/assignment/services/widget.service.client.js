@@ -15,9 +15,9 @@
         };
         return api;
 
-        function createWidget(pageId, widget) {
+        function createWidget(pageId, newWidget) {
             var url = "/api/page/"+pageId+"/widget";
-            return $http.post(url, widget);
+            return $http.post(url, newWidget);
         }
 
         function findAllWidgetsForPage(pageId) {

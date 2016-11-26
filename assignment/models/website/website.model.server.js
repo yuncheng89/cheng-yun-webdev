@@ -35,6 +35,10 @@ module.exports = function () {
             );
     }
 
+    function findWebsitesForUser(userId) {
+        return model.userModel.findWebsitesForUser(userId);
+    }
+
     function findAllPagesForWebsite(websiteId) { //returns website object with pages
         return WebsiteModel
             .findById(websiteId)
@@ -44,10 +48,6 @@ module.exports = function () {
 
     function findWebsiteById(websiteId) {
         return WebsiteModel.findById(websiteId);
-    }
-
-    function findWebsitesForUser(userId) {
-        return model.userModel.findWebsitesForUser(userId);
     }
 
     function createWebsite(userId, website) {
@@ -60,7 +60,11 @@ module.exports = function () {
                         websiteObj._user = userObj._id;
                         websiteObj.save();
                         userObj.websites.push(websiteObj);
-                        return userObj.save();
+                        userObj.save(); //return the USER object
+
+                        console.log("Newly created website on model server: ", websiteObj._id);
+                        //return websiteObj;
+
                     }, function(error){
                         console.log(error);
                     });

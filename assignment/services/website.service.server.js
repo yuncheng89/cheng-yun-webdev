@@ -3,7 +3,7 @@
  */
 module.exports = function(app, model) {
     console.log("Hello from website services on server");
-
+    /*
     var websites = [
         { "_id": 123, "name": "Facebook",    "developerId": 456, "description": "Lorem" },
         { "_id": 234, "name": "Tweeter",     "developerId": 456, "description": "Lorem" },
@@ -12,7 +12,7 @@ module.exports = function(app, model) {
         { "_id": 678, "name": "Checkers",    "developerId": 123, "description": "Lorem" },
         { "_id": 789, "name": "Chess",       "developerId": 234, "description": "Lorem" }
     ];
-
+    */
     app.get('/api/user/:uid/website', findAllWebsitesForUser);
     app.post('/api/user/:uid/website', createWebsite);
     app.get('/api/website/:websiteId', findWebsiteById);
@@ -21,16 +21,13 @@ module.exports = function(app, model) {
 
 
     function createWebsite(req, res) {
-        var website = req.body;
+        //var website = req.body;
         var uid = req.params.uid;
-        // websites.push(website);
-        // console.log(websites);
-        // res.send(websites);
 
         model.websiteModel
-            .createWebsite(uid, website)
+            .createWebsite(uid, req.body)
             .then(function (website) {
-                console.log(website);
+                console.log("what's created here? ", website._id);
                 res.json(website);
             });
 
@@ -41,8 +38,8 @@ module.exports = function(app, model) {
 
         model.websiteModel
             .findWebsitesForUser(uid)
-            .then(function(websites) {
-                res.json(websites);
+            .then(function(user) { //Gets a USER object in return
+                res.json(user);
             });
 
     }

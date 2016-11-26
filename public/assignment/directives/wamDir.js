@@ -38,7 +38,7 @@
     function sortableController(WidgetService, $routeParams) {
         var vm = this;
         vm.sort = sort;
-        vm.pid = parseInt($routeParams['pid']);
+        vm.pid = $routeParams['pid'];
 
         function sort(start, end) {
             WidgetService.sort(vm.pid, start, end);
