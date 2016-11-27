@@ -23,12 +23,10 @@
 
         function createWidget(widgetType) {
             var newWidget = {
-                widgetType: widgetType
+                widgetType: widgetType,
+                text: "Enter widget text here", //dummy values
+                size: 4 //dummy values
             };
-            //
-            // //dummy values
-            // newWidget.text = "Enter widget text here";
-            // newWidget.size = 4;
 
             WidgetService
                 .createWidget(vm.pid, newWidget)

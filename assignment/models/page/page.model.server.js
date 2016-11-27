@@ -30,7 +30,7 @@ module.exports = function () {
                         pageObj._website = websiteObj._id;
                         pageObj.save();
                         websiteObj.pages.push(pageObj);
-                        return websiteObj.save(); //return the WEBSITE object
+                        return websiteObj.save(); //return undefined
                     }, function(error){
                         console.log(error);
                     });

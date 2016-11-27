@@ -59,11 +59,11 @@ module.exports = function () {
                     .then(function(userObj){
                         websiteObj._user = userObj._id;
                         websiteObj.save();
-                        userObj.websites.push(websiteObj);
-                        userObj.save(); //return the USER object
 
                         console.log("Newly created website on model server: ", websiteObj._id);
-                        //return websiteObj;
+
+                        userObj.websites.push(websiteObj);
+                        return userObj.save(); //return undefined
 
                     }, function(error){
                         console.log(error);

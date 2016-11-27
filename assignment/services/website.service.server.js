@@ -27,7 +27,6 @@ module.exports = function(app, model) {
         model.websiteModel
             .createWebsite(uid, req.body)
             .then(function (website) {
-                console.log("what's created here? ", website._id);
                 res.json(website);
             });
 
@@ -61,7 +60,7 @@ module.exports = function(app, model) {
             .deleteWebsite(websiteId)
             .then(
                 function (status) {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
@@ -77,7 +76,7 @@ module.exports = function(app, model) {
             .updateWebsite(websiteId, website)
             .then(
                 function (status) {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
