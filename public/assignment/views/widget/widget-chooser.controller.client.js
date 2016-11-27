@@ -25,14 +25,16 @@
             var newWidget = {
                 widgetType: widgetType,
                 text: "Enter widget text here", //dummy values
-                size: 4 //dummy values
+                size:4,
+                width:100,
+                url: "http://www.google.com"
             };
 
             WidgetService
                 .createWidget(vm.pid, newWidget)
                 .success(function(addedWidget) { //Gets newly created WIDGET object from db in return
 
-                    console.log("newly created widget's id: "+addedWidget._id);
+                    console.log("newly created "+widgetType+" widget's id: "+addedWidget._id);
 
                     $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+addedWidget._id);
                 });

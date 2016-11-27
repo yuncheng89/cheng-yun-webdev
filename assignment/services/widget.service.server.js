@@ -133,16 +133,24 @@ module.exports = function(app, model) {
         console.log("widgetId ", widgetId);
         console.log("withExt ", url);
 
-        for(var w in widgets) {
-            if (widgets[w]._id == widgetId) {
-                widgets[w].width = width;
-                widgets[w].url = url;
-                res.redirect("/assignment/index.html#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
-                return;
-            }
-        }
-
-        res.redirect("/assignment/#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget");
+        model.widgetModel
+            .findWidgetById(widgetId)
+            .then(
+                function(widget) {
+                    widget.width = width;
+                    widget.url = url;
+                    model.widgetModel
+                        .updateWidget(widgetId, widget);
+                }
+            )
+            .then(
+                function (status) {
+                    res.redirect("/assignment/index.html#/user/"+developerId+"/website/"+websiteId+"/page/"+pageId+"/widget/"+widgetId);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
     }
 
 
