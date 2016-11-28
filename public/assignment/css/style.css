@@ -28,6 +28,10 @@ body {
     background-color: #428bca;
 }
 
+.padding-for-icon {
+    margin-right: 20px;
+}
+
 .youtube-widget {
     position: relative;
     padding-bottom: 56.25%; /* 16:9 */

@@ -81,7 +81,12 @@ module.exports = function () {
                     if (newWidget.icon) {
                         widget.icon = newWidget.icon;
                     }
-
+                    if (newWidget.deletable || !newWidget.deletable) {
+                        widget.deletable = newWidget.deletable;
+                    }
+                    if (newWidget.formatted || !newWidget.deletable) {
+                        widget.formatted = newWidget.formatted;
+                    }
                     return widget.save();
                 }
             );

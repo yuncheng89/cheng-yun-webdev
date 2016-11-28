@@ -54,6 +54,24 @@
             <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
             </div>
 
+            <div ng-switch-when="TEXT" class="padding-for-icon">
+                <div ng-if="widget.formatted"
+                     text-angular ta-toolbar="[['h1','h2','h3'],
+                     ['bold','italics','underline','strikeThrough'],
+                     ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                     ['indent','outdent'],['html']]"
+                     placeholder="{{widget.placeholder}}">
+                </div>
+                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                       class="form-control"
+                       placeholder="{{widget.placeholder}}"/>
+                <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                          class="form-control"
+                          rows="{{widget.rows}}"
+                          placeholder="{{widget.placeholder}}">{{widget.text}}</textarea>
+            </div>
+
+
         </div>
 
         <!--<div>{{models.widgets}}</div>-->
