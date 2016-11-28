@@ -25,7 +25,7 @@ module.exports = function () {
                         function(pageObj){
                             var widgetObj = new WidgetModel();
                             widgetObj.widgetType = newWidget.widgetType;
-                            widgetObj._page = pageObj._id;
+                            widgetObj._page = pageId;
 
                             pageObj.widgets.push(widgetObj);
                             pageObj.save();

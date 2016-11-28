@@ -31,6 +31,7 @@
             <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
+
             <div ng-switch="widget.size" ng-switch-when="HEADER">
                 <h1 ng-switch-when="1">{{widget.text}}</h1>
                 <h2 ng-switch-when="2">{{widget.text}}</h2>
@@ -52,6 +53,7 @@
 
             <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
             </div>
+
         </div>
 
         <!--<div>{{models.widgets}}</div>-->
