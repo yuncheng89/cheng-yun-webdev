@@ -156,33 +156,20 @@ module.exports = function(app, model) {
 
     function sortWidgets(req, res) {
         var pageId = req.params.pageId;
-        var widgetsForPage = [];
+        var startIndex = req.query.initial;
+        var endIndex = req.query.final;
 
-        var i = widgets.length;
-        while (i--) {
-            if(widgets[i].pageId == pageId) {
-                widgetsForPage.push(widgets[i]); //add to widgets for page array
-                widgets.splice(i, 1); //remove from main widgets array
-            }
-        }
+        model.widgetModel
+            .reorderWidget(pageId, startIndex, endIndex)
+            .then(
+                function (status) {
+                    return res.json(200);
+                },
+                function (err) {
+                    res.status(400).send(err);
+                }
+            );
 
-        widgetsForPage.reverse();
 
-        console.log(widgetsForPage);
-
-        var start = req.query.initial;
-        var end = req.query.final;
-
-        console.log([start, end]);
-        console.log("=====================================================================================");
-
-        widgetsForPage.splice(end, 0, widgetsForPage.splice(start, 1)[0]);
-
-        var concatenated = widgets.concat(widgetsForPage);
-        widgets = concatenated;
-
-        //widgets.push(widgetsForPage); //push back to main widgets array
-
-        console.log(widgets);
     }
 };

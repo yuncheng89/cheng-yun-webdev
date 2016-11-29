@@ -20,7 +20,8 @@
             WidgetService
                 .findAllWidgetsForPage(vm.pid)
                 .success(function(page) {
-                    vm.widgets = page.widgets;
+                    vm.widgets = page.widgets.sort(sortByOrder); //Get widgets sorted by order
+
                 });
 
             //The code below would make angular and jquery clash:
@@ -31,6 +32,16 @@
             // console.log(widgets);
         }
         init();
+
+
+        function sortByOrder(a,b) {
+            if (a.order < b.order)
+                return -1;
+            if (a.order > b.order)
+                return 1;
+            return 0;
+        }
+
 
         function checkSafeHtml(html) {
             return $sce.trustAsHtml(html);
