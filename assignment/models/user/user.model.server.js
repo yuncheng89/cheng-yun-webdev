@@ -33,10 +33,10 @@ module.exports = function () {
 
 
     function findUserByCredentials(username, password) {
-        return UserModel.find({
-                    username: username,
-                    password: password
-                });
+        return UserModel.findOne({
+            username: username,
+            password: password
+        });
     }
 
     function findUserByUsername(username) {

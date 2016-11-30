@@ -10,11 +10,73 @@ module.exports = function(app, model) {
     ];
     */
 
+
+    var passport      = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+    var cookieParser  = require('cookie-parser');
+    var session       = require('express-session');
+
+    app.use(session({
+        secret: 'this is the secret',
+        resave: true,
+        saveUninitialized: true
+    }));
+    app.use(cookieParser());
+    app.use(passport.initialize());
+    app.use(passport.session());
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', unregisterUser);
+    app.post('/api/login', passport.authenticate('local'), login);
+
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        model
+            .userModel
+            .findUserById(user._id)
+            .then(
+                function(user2){
+                    done(null, user2);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function localStrategy(username, password, done) {
+        model
+            .userModel
+            .findUserByCredentials(username, password)
+            .then(
+                function (user1) {
+                    if(!user1) { //did not find user
+                        return done(null, false);
+                    }
+                    return done(null, user1);
+                },
+                function (error) {
+                    res.sendStatus(400).send(error);
+                }
+            );
+    }
+
+    function login (req, res) {
+        var user3 = req.user;
+        res.json(user3);
+    }
+
 
     function unregisterUser(req, res) {
         var uid = req.params.uid;
@@ -92,12 +154,11 @@ module.exports = function(app, model) {
             .userModel
             .findUserByCredentials(username, password)
             .then(
-                function (users) {
-                    if(users.length===1) { //found one user
-                        res.json(users[0]);
-                    } else { //found zero users
+                function (user) {
+                    if(!user) { //did not find user
                         res.send('0');
                     }
+                    res.json(users[0]);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
