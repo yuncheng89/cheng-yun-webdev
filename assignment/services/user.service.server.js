@@ -28,13 +28,24 @@ module.exports = function(app, model) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/logout', logout);
+    app.post('/api/checkLogin', checkLogin);
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', unregisterUser);
-    app.post('/api/login', passport.authenticate('local'), login);
+
+
+    function logout(req, res) {
+        req.logout(); //passport api function
+        res.sendStatus(200);
+    }
+
+    function checkLogin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
 
 
     function serializeUser(user, done) {

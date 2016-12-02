@@ -13,7 +13,8 @@
             .when("/login", {
                 templateUrl: "views/user/login.view.client.html",
                 controller: "LoginController",
-                controllerAs: "model"
+                controllerAs: "model",
+
             })
             .when("/register", {
                 templateUrl: "views/user/register.view.client.html",
@@ -23,7 +24,10 @@
             .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
-                controllerAs: "model"
+                controllerAs: "model",
+                resolve: {
+                    checkLogin: checkLogin
+                }
             })
 
             .when("/user/:uid/website", {
@@ -75,5 +79,20 @@
             .otherwise({
                 redirectTo: "/"
             });
+
+        function checkLogin($q, UserService, $location) {
+            var deferred = $q.defer();
+            UserService
+                .checkLogin()
+                .success(function(user) {
+                    if (user != '0') {
+                        deferred.resolve();
+                    } else {
+                        deferred.reject();
+                        $location.url("/login"); //If you're not logged in, go back to login screen
+                    }
+                });
+            return deferred.promise;
+        }
     }
 })();
