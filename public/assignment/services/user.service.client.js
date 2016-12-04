@@ -14,8 +14,9 @@
             updateUser: updateUser,
             unregisterUser: unregisterUser,
             login: login,
+            logout: logout,
             checkLogin: checkLogin,
-            logout: logout
+            checkAdmin: checkAdmin
         };
         return api;
 
@@ -26,6 +27,10 @@
 
         function checkLogin() {
             return $http.post("/api/checkLogin");
+        }
+
+        function checkAdmin() {
+            return $http.post("/api/checkAdmin");
         }
 
         function login(username, password) {

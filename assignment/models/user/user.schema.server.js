@@ -12,7 +12,7 @@ module.exports = function() {
             token: String,
             email: String
         },
-        role: {type: String, enum: ['ADMIN', 'STUDENT', 'FACULTY']},
+        role: {type: String, default: 'STUDENT', enum: ['ADMIN', 'STUDENT', 'FACULTY']},
         websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}]
         // websites: [WebsiteSchema],
     }, {collection: "user"});

@@ -42,6 +42,9 @@
        ng-click="model.logout()">Logout</a>
     <a class="btn btn-warning btn-block"
        ng-click="model.unregisterUser()">Unregister</a>
+    <a class="btn btn-primary btn-block"
+       ng-show="model.user.role == 'ADMIN'"
+       href="#/admin">Admin</a>
 </div>
 
 
