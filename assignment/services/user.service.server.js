@@ -10,9 +10,9 @@ module.exports = function(app, model) {
     ];
     */
 
-
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
+    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var cookieParser  = require('cookie-parser');
     var session       = require('express-session');
 
@@ -28,6 +28,7 @@ module.exports = function(app, model) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+    app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout', logout);
     app.post('/api/checkLogin', checkLogin);
@@ -36,7 +37,64 @@ module.exports = function(app, model) {
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', unregisterUser);
+    app.get('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/assignment/index.html#/user',
+            failureRedirect: '/assignment/index.html#/login'
+        }));
 
+    var googleConfig = {
+
+        clientID     : "109777605510-6grugcuc6lnnnssdr0nc7ivvneusojjh",
+        clientSecret : "bBI9eUViV-4-o0_S6qUCtIWW",
+        callbackURL  : "http://localhost:3000/auth/google/callback"
+        //callbackURL  : "http://127.0.0.1:3000/auth/google/callback"
+
+        // clientID     : process.env.GOOGLE_CLIENT_ID, //TODO: set up environment variables
+        // clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        // callbackURL  : process.env.GOOGLE_CALLBACK_URL
+    };
+
+
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        model
+            .userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var email = profile.emails[0].value;
+                        var emailParts = email.split("@");
+                        var newGoogleUser = {
+                            username:  emailParts[0],
+                            first: profile.name.givenName,
+                            last:  profile.name.familyName,
+                            email:     email,
+                            google: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return model.userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function logout(req, res) {
         req.logout(); //passport api function

@@ -21,7 +21,15 @@
                 controller: "RegisterController",
                 controllerAs: "model"
             })
-            .when("/user/:uid", {
+            .when("/user", { //For google login
+                templateUrl: "views/user/profile.view.client.html",
+                controller: "ProfileController",
+                controllerAs: "model",
+                resolve: {
+                    checkLogin: checkLogin
+                }
+            })
+            .when("/user/:uid", { //For regular login
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model",
