@@ -212,6 +212,8 @@ module.exports = function(app, model) {
             findUserByCredentials(req, res);
         } else if(query.username) {
             findUserByUsername(req, res);
+        } else { //interpret as the currently logged in user (e.g. for google sign in)
+            res.json(req.user); //passport made user available on the request
         }
     }
 

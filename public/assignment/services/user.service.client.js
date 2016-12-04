@@ -8,6 +8,7 @@
         var api = {
             createUser: createUser,
             findUserById: findUserById,
+            findCurrentUser: findCurrentUser,
             findUserByUsername: findUserByUsername,
             findUserByCredentials: findUserByCredentials,
             updateUser: updateUser,
@@ -43,6 +44,11 @@
             };
 
             return $http.post("/api/user", user);
+        }
+
+        function findCurrentUser() {
+            var url = "/api/user/";
+            return $http.get(url);
         }
 
         function findUserById(userId) {
