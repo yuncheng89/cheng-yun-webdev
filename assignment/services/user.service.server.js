@@ -45,14 +45,13 @@ module.exports = function(app, model) {
 
     var googleConfig = {
 
-        clientID     : "109777605510-6grugcuc6lnnnssdr0nc7ivvneusojjh",
-        clientSecret : "bBI9eUViV-4-o0_S6qUCtIWW",
-        callbackURL  : "http://localhost:3000/auth/google/callback"
-        //callbackURL  : "http://127.0.0.1:3000/auth/google/callback"
+        // clientID     : "109777605510-6grugcuc6lnnnssdr0nc7ivvneusojjh",
+        // clientSecret : "bBI9eUViV-4-o0_S6qUCtIWW",
+        // callbackURL  : "http://localhost:3000/auth/google/callback"
 
-        // clientID     : process.env.GOOGLE_CLIENT_ID, //TODO: set up environment variables
-        // clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        // callbackURL  : process.env.GOOGLE_CALLBACK_URL
+        clientID     : process.env.GOOGLE_CLIENT_ID, //TODO: set up environment variables on server
+        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL  : process.env.GOOGLE_CALLBACK_URL
     };
 
 
