@@ -226,7 +226,15 @@ module.exports = function(app, model) {
             .createUser(user)
             .then(
                 function(newUser) {
-                    res.send(newUser);
+                    if(newUser){
+                        req.login(newUser, function(err) { //After create user, log in as that user
+                            if(err) {
+                                res.status(400).send(err);
+                            } else {
+                                res.json(newUser);
+                            }
+                        });
+                    }
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
