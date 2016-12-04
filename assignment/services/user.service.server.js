@@ -33,15 +33,29 @@ module.exports = function(app, model) {
     app.post('/api/logout', logout);
     app.post('/api/checkLogin', checkLogin);
     app.post('/api/user', createUser);
+    //app.get('/api/admin/user', loggedInAsAdmin, findAllUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
-    app.put('/api/user/:uid', updateUser);
-    app.delete('/api/user/:uid', unregisterUser);
+    app.put('/api/user/:uid', loggedInAndSelf, updateUser); //Only the currently logged in person can change their own info
+    app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
     app.get('/auth/google/callback',
         passport.authenticate('google', {
             successRedirect: '/assignment/index.html#/user',
             failureRedirect: '/assignment/index.html#/login'
         }));
+
+
+    function loggedInAndSelf(req, res, next) {
+        var loggedIn = req.isAuthenticated(); //from passport
+        var userId = req.params.uid;
+        var self = userId == req.user._id;
+        if (self && loggedIn) {
+            next();
+        } else {
+            res.sendStatus(400).send("You are not the same person");
+        }
+
+    }
 
     var googleConfig = {
 
