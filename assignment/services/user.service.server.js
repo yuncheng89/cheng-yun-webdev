@@ -13,6 +13,7 @@ module.exports = function(app, model) {
     var passport      = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    var FacebookStrategy = require('passport-facebook').Strategy;
     var cookieParser  = require('cookie-parser');
     var session       = require('express-session');
 
@@ -28,6 +29,9 @@ module.exports = function(app, model) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+
+
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.post('/api/login', passport.authenticate('local'), login);
     app.post('/api/logout', logout);
@@ -41,6 +45,11 @@ module.exports = function(app, model) {
     app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
     app.get('/auth/google/callback',
         passport.authenticate('google', {
+            successRedirect: '/assignment/index.html#/user',
+            failureRedirect: '/assignment/index.html#/login'
+        }));
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
             successRedirect: '/assignment/index.html#/user',
             failureRedirect: '/assignment/index.html#/login'
         }));
@@ -70,6 +79,18 @@ module.exports = function(app, model) {
     };
 
 
+    var facebookConfig = {
+
+        // clientID     : "1451363038237640",
+        // clientSecret : "7fe8c7a0beb8695f73f4cd54846faf14",
+        // callbackURL  : "http://localhost:3000/auth/facebook/callback"
+
+        clientID     : process.env.FACEBOOK_CLIENT_ID, //TODO: set up environment variables on server
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+
+
     passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
     function googleStrategy(token, refreshToken, profile, done) {
@@ -94,6 +115,47 @@ module.exports = function(app, model) {
                             }
                         };
                         return model.userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
+
+    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+    function facebookStrategy(token, refreshToken, profile, done) {
+        model
+            .userModel
+            .findUserByFacebookId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var names = profile.displayName.split(" ");
+                        var username = profile.displayName.replace(/ /g,"");
+                        var email = profile.emails ? profile.emails[0].value:"";
+                        var newFacebookUser = {
+                            username: username,
+                            firstName: names[0],
+                            lastName:  names[names.length - 1],
+                            email:     email,
+                            facebook: {
+                                id:    profile.id,
+                                token: token
+                            }
+                        };
+                        return model.userModel.createUser(newFacebookUser);
                     }
                 },
                 function(err) {

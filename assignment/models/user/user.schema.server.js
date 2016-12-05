@@ -12,6 +12,10 @@ module.exports = function() {
             token: String,
             email: String
         },
+        facebook: {
+            id:    String,
+            token: String
+        },
         role: {type: String, default: 'STUDENT', enum: ['ADMIN', 'STUDENT', 'FACULTY']},
         websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}]
         // websites: [WebsiteSchema],
