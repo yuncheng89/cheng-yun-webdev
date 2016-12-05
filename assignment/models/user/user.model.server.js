@@ -52,7 +52,7 @@ module.exports = function () {
      }
 
     function findUserByUsername(username) {
-        return UserModel.find({
+        return UserModel.findOne({
             username: username
         });
     }

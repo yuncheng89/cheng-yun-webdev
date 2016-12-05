@@ -16,6 +16,7 @@ module.exports = function(app, model) {
     var FacebookStrategy = require('passport-facebook').Strategy;
     var cookieParser  = require('cookie-parser');
     var session       = require('express-session');
+    var bcrypt = require("bcrypt-nodejs");
 
     app.use(session({
         secret: 'this is the secret',
@@ -216,13 +217,15 @@ module.exports = function(app, model) {
     function localStrategy(username, password, done) {
         model
             .userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username, password) //password is now encrypted, so can't use findUserByCredentials
             .then(
                 function (user1) {
-                    if(!user1) { //did not find user
+                    console.log(user1.password);
+                    if(user1 && bcrypt.compareSync(password, user1.password)) {
+                        return done(null, user1);
+                    } else {
                         return done(null, false);
                     }
-                    return done(null, user1);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
@@ -281,8 +284,8 @@ module.exports = function(app, model) {
 
     function createUser(req, res) {
         var user = req.body;
-        // user._id = (new Date()).getTime();
-        // users.push(user);
+        user.password = bcrypt.hashSync(user.password);
+
         model
             .userModel
             .createUser(user)
