@@ -24,11 +24,16 @@
         init();
 
         function createPage(page) {
-            PageService
-                .createPage(vm.wid, page)
-                .success(function() {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
-                });
+            if (!page.name) {
+                vm.error = "Name is required"
+            }
+            else {
+                PageService
+                    .createPage(vm.wid, page)
+                    .success(function () {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    });
+            }
         }
 
     }

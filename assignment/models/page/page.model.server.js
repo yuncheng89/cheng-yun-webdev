@@ -21,20 +21,21 @@ module.exports = function () {
 
 
     function createPage(websiteId, page) {
-        return PageModel
-            .create(page)
-            .then(function(pageObj){
-                model.websiteModel
-                    .findWebsiteById(websiteId)
-                    .then(function(websiteObj){
-                        pageObj._website = websiteObj._id;
-                        pageObj.save();
-                        websiteObj.pages.push(pageObj);
-                        return websiteObj.save(); //return undefined
-                    }, function(error){
-                        console.log(error);
-                    });
-            });
+        return model.websiteModel
+            .findWebsiteById(websiteId)
+            .then(
+                function (websiteObj) {
+                    var pageObj = new PageModel();
+                    pageObj._website = websiteObj._id;
+                    pageObj.name = page.name;
+                    pageObj.description = page.description;
+                    websiteObj.pages.push(pageObj);
+                    websiteObj.save();
+                    return pageObj.save();
+                },
+                function (error) {
+                    console.log("error: " + error);
+                });
     }
     function findAllPagesForWebsite(websiteId) {
         return model.websiteModel.findAllPagesForWebsite(websiteId);

@@ -27,12 +27,17 @@
 
         function createWebsite(website) {
 
+            if (!website.name) {
+                vm.error = "Name is required"
+            }
 
-            WebsiteService
-                .createWebsite(vm.uid, website)
-                .success(function () {
-                    $location.url("/user/"+vm.uid+"/website");
-                });
+            else {
+                WebsiteService
+                    .createWebsite(vm.uid, website)
+                    .success(function () {
+                        $location.url("/user/"+vm.uid+"/website");
+                    });
+            }
         }
     }
 })();

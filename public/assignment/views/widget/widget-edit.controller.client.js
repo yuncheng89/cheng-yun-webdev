@@ -38,11 +38,17 @@
 
         function updateWidget() {
             console.log("Update widget "+vm.wgid);
-            WidgetService
-                .updateWidget(vm.widget)
-                .success(function() {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
-                });
+
+            if (!vm.widget.name) {
+                vm.error = "Name is required"
+            }
+            else {
+                WidgetService
+                    .updateWidget(vm.widget)
+                    .success(function () {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page/" + vm.pid + "/widget");
+                    });
+            }
         }
     }
 })();

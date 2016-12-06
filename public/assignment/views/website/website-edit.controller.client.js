@@ -42,11 +42,18 @@
         }
 
         function updateWebsite() {
-            WebsiteService
-                .updateWebsite(vm.website)
-                .success(function () {
-                    $location.url("/user/" + vm.uid + "/website");
-                });
+
+            if (!vm.website.name) {
+                vm.error = "Name is required"
+            }
+
+            else {
+                WebsiteService
+                    .updateWebsite(vm.website)
+                    .success(function () {
+                        $location.url("/user/" + vm.uid + "/website");
+                    });
+            }
         }
     }
 

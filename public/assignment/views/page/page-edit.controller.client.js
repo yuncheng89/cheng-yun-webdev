@@ -41,11 +41,16 @@
         }
 
         function updatePage() {
-            PageService
-                .updatePage(vm.page)
-                .success(function() {
-                    $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
-                });
+            if (!vm.page.name) {
+                vm.error = "Name is required"
+            }
+            else {
+                PageService
+                    .updatePage(vm.page)
+                    .success(function () {
+                        $location.url("/user/" + vm.uid + "/website/" + vm.wid + "/page");
+                    });
+            }
         }
 
     }

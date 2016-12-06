@@ -35,7 +35,7 @@ module.exports = function(app, model) {
         model.pageModel
             .createPage(websiteId, page)
             .then(function (page) {
-                console.log("website or page?", page);
+                console.log("Newly created page on model server: ", page._id);
                 res.json(page);
             });
     }
