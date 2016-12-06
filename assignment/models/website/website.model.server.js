@@ -51,23 +51,22 @@ module.exports = function () {
     }
 
     function createWebsite(userId, website) {
-        return WebsiteModel
-            .create(website)
-            .then(function(websiteObj){
-                model.userModel
-                    .findUserById(userId)
-                    .then(function(userObj){
-                        websiteObj._user = userObj._id;
-                        websiteObj.save();
 
-                        console.log("Newly created website on model server: ", websiteObj._id);
+        return model.userModel
+            .findUserById(userId)
+            .then(
+                function (userObj) {
+                    var websiteObj = new WebsiteModel();
+                    websiteObj._user = userObj._id;
+                    websiteObj.name = website.name;
+                    websiteObj.description = website.description;
+                    userObj.websites.push(websiteObj);
+                    userObj.save();
+                    return websiteObj.save();
+                },
+                function (error) {
+                    console.log("error: " + error);
+                });
 
-                        userObj.websites.push(websiteObj);
-                        return userObj.save(); //return undefined
-
-                    }, function(error){
-                        console.log(error);
-                    });
-            });
     }
 };

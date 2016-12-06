@@ -27,6 +27,7 @@ module.exports = function(app, model) {
         model.websiteModel
             .createWebsite(uid, req.body)
             .then(function (website) {
+                console.log("Newly created website on model server: ", website._id);
                 res.json(website);
             });
 
