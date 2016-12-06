@@ -220,8 +220,7 @@ module.exports = function(app, model) {
             .findUserByUsername(username, password) //password is now encrypted, so can't use findUserByCredentials
             .then(
                 function (user1) {
-                    console.log(user1.password);
-                    if(user1 && bcrypt.compareSync(password, user1.password)) {
+                    if(user1!=null && bcrypt.compareSync(password, user1.password)) {
                         return done(null, user1);
                     } else {
                         return done(null, false);
