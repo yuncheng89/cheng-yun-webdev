@@ -1,0 +1,33 @@
+<!--<div class="container-fluid" ng-controller="MovieSearchController as model">-->
+<div class="container-fluid">
+    <h1>Track Search</h1>
+
+    <div class="input-group">
+        <input ng-model="title" type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+        <button ng-click="model.searchTrackByTitle(title)" class="btn btn-default" type="button">Go!</button>
+      </span>
+    </div>
+
+
+    <table class="table">
+        <trhead>
+            <tr>
+                <th>Title</th>
+                <th>Artist</th>
+                <th>Poster</th>
+            </tr>
+        </trhead>
+        <tbody>
+        <tr ng-repeat="track in model.tracks">
+            <td><a href="#/details/{{track.id}}/{{model.title}}">{{track.name}}</a></td>
+            <td>{{track.artists[0].name}}</td>
+            <td><img ng-src="{{track.album.images[0].url}}" height="100px"/></td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    {{model.tracks}}
+
+</div>

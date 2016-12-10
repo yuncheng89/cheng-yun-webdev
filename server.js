@@ -12,7 +12,8 @@ app.use(express.static(__dirname + '/public'));
 //require ("./test/app.js")(app);
 
 require("./assignment/app.js")(app);
-require("./lecture/todo/app.js")(app);
+
+//require("./lecture/todo/app.js")(app);
 
 app.get('/env', function(req,res){
    res.json(process.env);

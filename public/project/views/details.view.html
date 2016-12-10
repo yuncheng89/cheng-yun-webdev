@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h1>
+        <a href="#/search">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        </a>
+        {{model.track.name}}
+    </h1>
+
+    <div class="row">
+        <div class="col-xs-6">
+            <div>
+                Artist: {{model.track.artist[0].name}}
+            </div>
+            <div>
+                Album: {{model.track.album.name}}
+            </div>
+            <div>
+                Duration: {{model.track.duration_ms}}
+            </div>
+        </div>
+
+        <div class="col-xs-6">
+            <img ng-src="{{model.track.album.images[0]}}" height="300px"/>
+        </div>
+    </div>
+
+
+{{model.track}}
+
+</div>
