@@ -1,6 +1,6 @@
 module.exports = function(app, model) {
 
-    console.log("Hello from ASSIGNMENT user services on server");
+    console.log("Hello from PROJECT user services on server");
 
     /*
     var users = [
@@ -46,13 +46,13 @@ module.exports = function(app, model) {
     app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
     app.get('/auth/google/callback',
         passport.authenticate('google', {
-            successRedirect: '/assignment/index.html#/user',
-            failureRedirect: '/assignment/index.html#/login'
+            successRedirect: '/project/index.html#/user',
+            failureRedirect: '/project/index.html#/login'
         }));
     app.get('/auth/facebook/callback',
         passport.authenticate('facebook', {
-            successRedirect: '/assignment/index.html#/user',
-            failureRedirect: '/assignment/index.html#/login'
+            successRedirect: '/project/index.html#/user',
+            failureRedirect: '/project/index.html#/login'
         }));
 
 

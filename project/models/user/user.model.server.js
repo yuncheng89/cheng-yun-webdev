@@ -2,7 +2,7 @@ module.exports = function () {
     var model = {};
     var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server")();
-    var AssignmentUserModel  = mongoose.model("AssignmentUserModel", UserSchema);
+    var ProjectUserModel  = mongoose.model("ProjectUserModel", UserSchema);
 
     var api = {
         createUser: createUser,
@@ -22,43 +22,43 @@ module.exports = function () {
     }
 
     function findUserByGoogleId(googleId) {
-        return AssignmentUserModel
+        return ProjectUserModel
             .findOne({"google.id": googleId})
     }
 
     function findUserByFacebookId(facebookId) {
-        return AssignmentUserModel
+        return ProjectUserModel
             .findOne({'facebook.id': facebookId});
     }
 
     function findWebsitesForUser(userId) { //returns user object with websites
-        return AssignmentUserModel
+        return ProjectUserModel
             .findById(userId)
             .populate("websites", "name") //just want names of websites from db
             .exec();
     }
 
     function removeUser(userId) {
-        return AssignmentUserModel
+        return ProjectUserModel
             .remove({_id: userId});
     }
 
 
     function findUserByCredentials(username, password) {
-        return AssignmentUserModel.findOne({
+        return ProjectUserModel.findOne({
             username: username,
             password: password
         });
      }
 
     function findUserByUsername(username) {
-        return AssignmentUserModel.findOne({
+        return ProjectUserModel.findOne({
             username: username
         });
     }
 
     function updateUser(userId, user) {
-        return AssignmentUserModel //return promise
+        return ProjectUserModel //return promise
             .update(
                 {
                     _id: userId
@@ -72,10 +72,10 @@ module.exports = function () {
 
     function findUserById(userId) {
         // UserModel.find({_id: userId}) --> returns an array
-        return AssignmentUserModel.findById(userId); //returns a promise
+        return ProjectUserModel.findById(userId); //returns a promise
     }
 
     function createUser(user) {
-        return AssignmentUserModel.create(user); //returns a promise
+        return ProjectUserModel.create(user); //returns a promise
     }
 };

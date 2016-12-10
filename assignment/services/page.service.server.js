@@ -2,7 +2,7 @@
  * Created by macbook on 10/31/16.
  */
 module.exports = function(app, model) {
-    console.log("Hello from page services on server");
+    console.log("Hello from ASSIGNMENT page services on server");
 
     /*
     var pages = [

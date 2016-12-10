@@ -1,23 +1,23 @@
 module.exports = function () {
-    var mongoose = require('mongoose');
-
-    var connectionString = 'mongodb://127.0.0.1:27017/wam-fall-2016';
-
-    //Check if local environment variables exist
-    if(process.env.MLAB_USERNAME) {
-
-        var username = process.env.MLAB_USERNAME;
-        var password = process.env.MLAB_PASSWORD;
-
-        connectionString = 'mongodb://'+
-            username +':'+
-            password +
-            '@ds049446.mlab.com:49446/cs5610';
-    }
-
-    console.log(connectionString);
-
-    mongoose.connect(connectionString);
+    // var mongoose = require('mongoose');
+    //
+    // var connectionString = 'mongodb://127.0.0.1:27017/wam-fall-2016';
+    //
+    // //Check if local environment variables exist
+    // if(process.env.MLAB_USERNAME) {
+    //
+    //     var username = process.env.MLAB_USERNAME;
+    //     var password = process.env.MLAB_PASSWORD;
+    //
+    //     connectionString = 'mongodb://'+
+    //         username +':'+
+    //         password +
+    //         '@ds049446.mlab.com:49446/cs5610';
+    // }
+    //
+    // console.log(connectionString);
+    //
+    // mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();
     var websiteModel = require("./website/website.model.server")();

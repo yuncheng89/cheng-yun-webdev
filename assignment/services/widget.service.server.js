@@ -2,7 +2,7 @@
  * Created by macbook on 10/31/16.
  */
 module.exports = function(app, model) {
-    console.log("Hello from widget services on server");
+    console.log("Hello from ASSIGNMENT widget services on server");
 
     var multer = require('multer'); // npm install multer --save
     var mime = require('mime');

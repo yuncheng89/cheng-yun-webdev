@@ -2,7 +2,7 @@
  * Created by macbook on 10/31/16.
  */
 module.exports = function(app, model) {
-    console.log("Hello from website services on server");
+    console.log("Hello from ASSIGNMENT website services on server");
     /*
     var websites = [
         { "_id": 123, "name": "Facebook",    "developerId": 456, "description": "Lorem" },
