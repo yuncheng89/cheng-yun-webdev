@@ -13,6 +13,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 /*******************************************************/
+// Passport session
+
+var passport      = require('passport');
+var cookieParser  = require('cookie-parser');
+var session       = require('express-session');
+
+app.use(session({
+    secret: 'this is the secret',
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
+/*******************************************************/
 // Connect to database
 
 var mongoose = require('mongoose');

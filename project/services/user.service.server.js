@@ -14,27 +14,17 @@ module.exports = function(app, model) {
     var LocalStrategy = require('passport-local').Strategy;
     var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
     var FacebookStrategy = require('passport-facebook').Strategy;
-    var cookieParser  = require('cookie-parser');
-    var session       = require('express-session');
+
     var bcrypt = require("bcrypt-nodejs");
 
-    app.use(session({
-        secret: 'this is the secret',
-        resave: true,
-        saveUninitialized: true
-    }));
-    app.use(cookieParser());
-    app.use(passport.initialize());
-    app.use(passport.session());
-    passport.use(new LocalStrategy(localStrategy));
+
+    passport.use('local-project', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
-
-
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/login', passport.authenticate('local-project'), login);
     app.post('/api/logout', logout);
     app.post('/api/checkLogin', checkLogin);
     app.post('/api/checkAdmin', checkAdmin);
@@ -44,8 +34,9 @@ module.exports = function(app, model) {
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', loggedInAndSelf, updateUser); //Only the currently logged in person can change their own info
     app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
+
     app.get('/auth/google/callback',
-        passport.authenticate('google', {
+        passport.authenticate('google-project', {
             successRedirect: '/project/index.html#/user',
             failureRedirect: '/project/index.html#/login'
         }));
@@ -92,7 +83,7 @@ module.exports = function(app, model) {
     };
 
 
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    passport.use('google', new GoogleStrategy(googleConfig, googleStrategy));
 
     function googleStrategy(token, refreshToken, profile, done) {
         model
