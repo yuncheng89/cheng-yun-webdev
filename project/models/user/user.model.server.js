@@ -1,35 +1,19 @@
-module.exports = function () {
-    var model = {};
-    var mongoose = require("mongoose");
-    var UserSchema = require("./user.schema.server")();
+module.exports = function (mongoose) {
+
+    var UserSchema = require("./user.schema.server")(mongoose);
     var ProjectUserModel  = mongoose.model("ProjectUserModel", UserSchema);
 
     var api = {
         createUser: createUser,
-        findUserByGoogleId: findUserByGoogleId,
-        findUserByFacebookId: findUserByFacebookId,
         findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
         findWebsitesForUser: findWebsitesForUser,
         updateUser: updateUser,
-        removeUser: removeUser,
-        setModel: setModel
+        removeUser: removeUser
     };
     return api;
-    function setModel(_model) {
-        model = _model;
-    }
 
-    function findUserByGoogleId(googleId) {
-        return ProjectUserModel
-            .findOne({"google.id": googleId})
-    }
-
-    function findUserByFacebookId(facebookId) {
-        return ProjectUserModel
-            .findOne({'facebook.id': facebookId});
-    }
 
     function findWebsitesForUser(userId) { //returns user object with websites
         return ProjectUserModel
@@ -71,7 +55,7 @@ module.exports = function () {
     }
 
     function findUserById(userId) {
-        // UserModel.find({_id: userId}) --> returns an array
+        // userModel.find({_id: userId}) --> returns an array
         return ProjectUserModel.findById(userId); //returns a promise
     }
 

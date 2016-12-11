@@ -1,6 +1,9 @@
+/**
+ * Created by macbook on 12/11/16.
+ */
 (function(){
     angular
-        .module("WebAppMaker")
+        .module("MixtapeNetwork")
         .controller("RegisterController", RegisterController);
 
     function RegisterController($location, UserService) {
@@ -25,7 +28,9 @@
                 // UserService
                 //     .findUserByUsername(username)
                 //     .then(function (user) {
-                //         if (user=='0') {
+                //         if (user!='0') {
+                //             vm.error = "Username already taken"
+                //         } else {
                             //Username not already taken - can register
                             UserService
                                 .createUser(username, password)
@@ -37,14 +42,9 @@
                                 .error(function (error) {
                                     vm.error = error;
                                 });
-
-                    //     } else {
-                    //         vm.error = "Username already taken"
                     //     }
-                    //
                     // }, function (error) {
                     //     vm.error = error;
-                    //
                     // });
 
             }

@@ -1,7 +1,6 @@
-module.exports = function () {
-    var model = {};
-    var mongoose = require("mongoose");
-    var UserSchema = require("./user.schema.server")();
+module.exports = function (mongoose) {
+
+    var UserSchema = require("./user.schema.server")(mongoose);
     var AssignmentUserModel  = mongoose.model("AssignmentUserModel", UserSchema);
 
     var api = {
@@ -13,13 +12,9 @@ module.exports = function () {
         findUserByUsername: findUserByUsername,
         findWebsitesForUser: findWebsitesForUser,
         updateUser: updateUser,
-        removeUser: removeUser,
-        setModel: setModel
+        removeUser: removeUser
     };
     return api;
-    function setModel(_model) {
-        model = _model;
-    }
 
     function findUserByGoogleId(googleId) {
         return AssignmentUserModel

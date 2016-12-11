@@ -22,6 +22,7 @@
                         if (user === '0') {
                             vm.error = "No such user";
                         } else {
+                            //$rootScope.currentUser = user;
                             $location.url("/user/" + user._id);
                         }
                     })

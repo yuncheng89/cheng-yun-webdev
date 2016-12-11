@@ -1,33 +1,17 @@
-module.exports = function(app, model) {
+module.exports = function(app, model, sec) {
 
     console.log("Hello from ASSIGNMENT user services on server");
 
-    /*
-    var users = [
-        {username: 'alice', password: 'ewq', _id: 123, first: 'Alice', last: 'Wonderland'},
-        {username: 'bob', password: 'ewq', _id: 234, first: 'Bob', last: 'Dylan'},
-        {username: 'charlie', password: 'ewq', _id: 345, first: 'Charlie', last: 'Brown'}
-    ];
-    */
-
-    var passport      = require('passport');
-    var LocalStrategy = require('passport-local').Strategy;
-    var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-    var FacebookStrategy = require('passport-facebook').Strategy;
-
-    var bcrypt = require("bcrypt-nodejs");
-
-
-    passport.use('local-assignment', new LocalStrategy(localStrategy));
-    passport.serializeUser(serializeUser);
-    passport.deserializeUser(deserializeUser);
+    var bcrypt = sec.getBCrypt();
+    var passport = sec.getPassport();
 
     app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
     app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
-    app.post('/api/login', passport.authenticate('local-assignment'), login);
+    app.post('/api/login', passport.authenticate('wam'), login);
     app.post('/api/logout', logout);
     app.post('/api/checkLogin', checkLogin);
     app.post('/api/checkAdmin', checkAdmin);
+
     app.post('/api/user', createUser);
     //app.get('/api/admin/user', loggedInAsAdmin, findAllUser);
     app.get('/api/user', findUser);
@@ -59,110 +43,6 @@ module.exports = function(app, model) {
 
     }
 
-    var googleConfig = {
-
-        // clientID     : "109777605510-6grugcuc6lnnnssdr0nc7ivvneusojjh",
-        // clientSecret : "bBI9eUViV-4-o0_S6qUCtIWW",
-        // callbackURL  : "http://localhost:3000/auth/google/callback"
-
-        clientID     : process.env.GOOGLE_CLIENT_ID, //TODO: set up environment variables on server
-        clientSecret : process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL  : process.env.GOOGLE_CALLBACK_URL
-    };
-
-
-    var facebookConfig = {
-
-        // clientID     : "1451363038237640",
-        // clientSecret : "7fe8c7a0beb8695f73f4cd54846faf14",
-        // callbackURL  : "http://localhost:3000/auth/facebook/callback"
-
-        clientID     : process.env.FACEBOOK_CLIENT_ID, //TODO: set up environment variables on server
-        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
-    };
-
-
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
-
-    function googleStrategy(token, refreshToken, profile, done) {
-        model
-            .userModel
-            .findUserByGoogleId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var email = profile.emails[0].value;
-                        var emailParts = email.split("@");
-                        var newGoogleUser = {
-                            username:  emailParts[0],
-                            first: profile.name.givenName,
-                            last:  profile.name.familyName,
-                            email:     email,
-                            google: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return model.userModel.createUser(newGoogleUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
-
-    passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
-
-    function facebookStrategy(token, refreshToken, profile, done) {
-        model
-            .userModel
-            .findUserByFacebookId(profile.id)
-            .then(
-                function(user) {
-                    if(user) {
-                        return done(null, user);
-                    } else {
-                        var names = profile.displayName.split(" ");
-                        var username = profile.displayName.replace(/ /g,"");
-                        var email = profile.emails ? profile.emails[0].value:"";
-                        var newFacebookUser = {
-                            username: username,
-                            firstName: names[0],
-                            lastName:  names[names.length - 1],
-                            email:     email,
-                            facebook: {
-                                id:    profile.id,
-                                token: token
-                            }
-                        };
-                        return model.userModel.createUser(newFacebookUser);
-                    }
-                },
-                function(err) {
-                    if (err) { return done(err); }
-                }
-            )
-            .then(
-                function(user){
-                    return done(null, user);
-                },
-                function(err){
-                    if (err) { return done(err); }
-                }
-            );
-    }
 
     function logout(req, res) {
         req.logout(); //passport api function
@@ -187,42 +67,6 @@ module.exports = function(app, model) {
     }
 
 
-    function serializeUser(user, done) {
-        done(null, user);
-    }
-
-    function deserializeUser(user, done) {
-        model
-            .userModel
-            .findUserById(user._id)
-            .then(
-                function(user2){
-                    done(null, user2);
-                },
-                function(err){
-                    done(err, null);
-                }
-            );
-    }
-
-    function localStrategy(username, password, done) {
-        model
-            .userModel
-            .findUserByUsername(username, password) //password is now encrypted, so can't use findUserByCredentials
-            .then(
-                function (user1) {
-                    if(user1!=null && bcrypt.compareSync(password, user1.password)) {
-                        return done(null, user1);
-                    } else {
-                        return done(null, false);
-                    }
-                },
-                function (error) {
-                    res.sendStatus(400).send(error);
-                }
-            );
-    }
-
     function login (req, res) {
         var user3 = req.user;
         res.json(user3);
@@ -236,7 +80,7 @@ module.exports = function(app, model) {
             .removeUser(uid)
             .then(
                 function (status) {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
@@ -258,7 +102,7 @@ module.exports = function(app, model) {
             .updateUser(uid, user)
             .then(
                 function (status) {
-                    res.send(200);
+                    res.sendStatus(200);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);

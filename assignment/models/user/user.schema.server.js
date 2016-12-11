@@ -1,5 +1,4 @@
-module.exports = function() {
-    var mongoose = require("mongoose");
+module.exports = function(mongoose) {
     // var WebsiteSchema = require("../website/website.schema.server")();
     var UserSchema = mongoose.Schema({
         username: String,
@@ -17,9 +16,10 @@ module.exports = function() {
             token: String
         },
         role: {type: String, default: 'STUDENT', enum: ['ADMIN', 'STUDENT', 'FACULTY']},
-        websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}]
+        websites: [{type: mongoose.Schema.Types.ObjectId, ref:'WebsiteModel'}],
         // websites: [WebsiteSchema],
-    }, {collection: "user"});
+        type: {type: String, default: 'wam'}
+    }, {collection: "userWAM"});
     return UserSchema;
 };
 

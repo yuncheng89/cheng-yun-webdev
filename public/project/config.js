@@ -33,14 +33,6 @@
                     checkAdmin: checkAdmin
                 }
             })
-            .when("/user", { //For google login
-                templateUrl: "views/user/profile.view.client.html",
-                controller: "ProfileController",
-                controllerAs: "model",
-                resolve: {
-                    checkLogin: checkLogin
-                }
-            })
             .when("/user/:uid", { //For regular login
                 templateUrl: "views/user/profile.view.client.html",
                 controller: "ProfileController",
@@ -50,6 +42,21 @@
                 }
             })
 
+            .when("/user/:uid/playlist", {
+                templateUrl: "views/playlist/playlist-list.view.client.html",
+                controller: "PlaylistListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/playlist/new", {
+                    templateUrl: "views/playlist/playlist-new.view.client.html",
+                    controller: "PlaylistNewController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/playlist/:wid", {
+                    templateUrl: "views/playlist/playlist-edit.view.client.html",
+                    controller: "PlaylistEditController",
+                controllerAs: "model"
+            })
             .when("/search", {
                 templateUrl: "views/search.view.html",
                 controller: "TrackSearchController",

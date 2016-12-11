@@ -29,36 +29,27 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /*******************************************************/
-// Connect to database
+// Centralized database object
 
 var mongoose = require('mongoose');
 
-var connectionString = 'mongodb://127.0.0.1:27017/wam-fall-2016';
-
-//Check if local environment variables exist
-if(process.env.MLAB_USERNAME) {
-
-   var username = process.env.MLAB_USERNAME;
-   var password = process.env.MLAB_PASSWORD;
-
-   connectionString = 'mongodb://'+
-       username +':'+
-       password +
-       '@ds049446.mlab.com:49446/cs5610';
-}
-
-console.log(connectionString);
-
-mongoose.connect(connectionString);
+var db = require('./database/database.js')(mongoose);
 
 /*******************************************************/
+// Centralized passport object
+
+var sec = require('./security/security.js')(db, passport);
+
+/*******************************************************/
+// Pass in centralized objects: app, db, sec
 
 //require ("./test/app.js")(app);
-
-require("./assignment/app.js")(app);
-require("./project/app.js")(app);
-
 //require("./lecture/todo/app.js")(app);
+require("./assignment/app")(app, db, sec);
+require("./project/app")(app, db, sec);
+
+
+/*******************************************************/
 
 app.get('/env', function(req,res){
    res.json(process.env);

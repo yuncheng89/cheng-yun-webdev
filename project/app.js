@@ -1,7 +1,8 @@
-module.exports = function(app) {
+module.exports = function(app, db, sec) {
 
-    var model = require("./models/model.server")();
+    var model = db.mnModels();
 
-    require("./services/user.service.server.js")(app, model);
+    require("./services/user.service.server.js")(app, model, sec);
+    require("./services/playlist.service.server.js")(app, model);
 
 };
