@@ -5,17 +5,17 @@ module.exports = function(app, model, sec) {
     var bcrypt = sec.getBCrypt();
     var passport = sec.getPassport();
 
-    app.post('/api/login', passport.authenticate('nm'), login);
-    app.post('/api/logout', logout);
-    app.post('/api/checkLogin', checkLogin);
-    app.post('/api/checkAdmin', checkAdmin);
+    app.post('/projapi/login', passport.authenticate('mn'), login);
+    app.post('/projapi/logout', logout);
+    app.post('/projapi/checkLogin', checkLogin);
+    app.post('/projapi/checkAdmin', checkAdmin);
 
-    app.post('/api/user', createUser);
-    //app.get('/api/admin/user', loggedInAsAdmin, findAllUser);
-    app.get('/api/user', findUser);
-    app.get('/api/user/:uid', findUserById);
-    app.put('/api/user/:uid', loggedInAndSelf, updateUser); //Only the currently logged in person can change their own info
-    app.delete('/api/user/:uid', loggedInAndSelf, unregisterUser);
+    app.post('/projapi/user', createUser);
+    //app.get('/projapi/admin/user', loggedInAsAdmin, findAllUser);
+    app.get('/projapi/user', findUser);
+    app.get('/projapi/user/:uid', findUserById);
+    app.put('/projapi/user/:uid', loggedInAndSelf, updateUser); //Only the currently logged in person can change their own info
+    app.delete('/projapi/user/:uid', loggedInAndSelf, unregisterUser);
 
 
 

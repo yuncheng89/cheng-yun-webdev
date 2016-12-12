@@ -22,15 +22,15 @@
 
 
         function logout() {
-            return $http.post("/api/logout");
+            return $http.post("/projapi/logout");
         }
 
         function checkLogin() {
-            return $http.post("/api/checkLogin");
+            return $http.post("/projapi/checkLogin");
         }
 
         function checkAdmin() {
-            return $http.post("/api/checkAdmin");
+            return $http.post("/projapi/checkAdmin");
         }
 
         function login(username, password) {
@@ -39,7 +39,7 @@
                 password: password
             };
 
-            return $http.post("/api/login", user);
+            return $http.post("/projapi/login", user);
         }
 
         function createUser(username, password) {
@@ -48,38 +48,38 @@
                 password: password
             };
 
-            return $http.post("/api/user", user);
+            return $http.post("/projapi/user", user);
         }
 
         function findCurrentUser() {
-            var url = "/api/user/";
+            var url = "/projapi/user/";
             return $http.get(url);
         }
 
         function findUserById(userId) {
-            var url = "/api/user/"+userId;
+            var url = "/projapi/user/"+userId;
             return $http.get(url);
 
         }
 
         function findUserByUsername(username) {
-            var url = '/api/user?username='+username;
+            var url = '/projapi/user?username='+username;
             return $http.get(url);
         }
 
         function findUserByCredentials(username, password) {
-            var url = '/api/user?username='+username+'&password='+password;
+            var url = '/projapi/user?username='+username+'&password='+password;
             return $http.get(url);
 
         }
 
         function updateUser(user) {
-            var url = "/api/user/" + user._id;
+            var url = "/projapi/user/" + user._id;
             return $http.put(url, user);
         }
 
         function unregisterUser(userId) {
-            var url = "/api/user/" + userId;
+            var url = "/projapi/user/" + userId;
             return $http.delete(url);
         }
 
