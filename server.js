@@ -45,7 +45,7 @@ var sec = require('./security/security.js')(db, passport);
 
 //require ("./test/app.js")(app);
 //require("./lecture/todo/app.js")(app);
-//require("./assignment/app")(app, db, sec);
+require("./assignment/app")(app, db, sec);
 require("./project/app")(app, db, sec);
 
 
