@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid col-sm-12">
+        <div class="col-sm-12">
+            <div class="navbar-text pull-left" style="margin-left: 0px">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-right" style="margin-right: 0px;">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/new">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/track">
+                    Tracks
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="row container-fluid" wam-sortable>
+    <!--{{model.playlists}}-->
+
+    <ul class="list-group">
+        <li ng-repeat="track in model.tracks" class="list-group-item">
+
+            <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}/track/{{track._id}}">
+                {{track.name}}
+            </a>
+            <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}/track/{{track._id}}" class="pull-right" style="margin-left: 15px;">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <a href="#" class="pull-right">
+                <span class="glyphicon glyphicon-play"></span>
+            </a>
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom bg-primary">
+    <div class="container-fluid">
+        <div class="nav-bar header">
+            <a href="#/user/{{model.uid}}" class="navbar-brand pull-right">
+                <span class = "glyphicon glyphicon-user"></span>
+            </a>
+        </div>
+    </div>
+</nav>

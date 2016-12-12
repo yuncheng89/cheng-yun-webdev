@@ -48,15 +48,24 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/playlist/new", {
-                    templateUrl: "views/playlist/playlist-new.view.client.html",
-                    controller: "PlaylistNewController",
+                templateUrl: "views/playlist/playlist-new.view.client.html",
+                controller: "PlaylistNewController",
                 controllerAs: "model"
             })
-            .when("/user/:uid/playlist/:wid", {
-                    templateUrl: "views/playlist/playlist-edit.view.client.html",
-                    controller: "PlaylistEditController",
+            .when("/user/:uid/playlist/:pid", {
+                templateUrl: "views/playlist/playlist-edit.view.client.html",
+                controller: "PlaylistEditController",
                 controllerAs: "model"
             })
+            .when("/user/:uid/playlist/:pid/track", {
+                templateUrl: "views/track/track-list.view.client.html",
+                controller: "TrackListController",
+                controllerAs: "model"
+            })
+            .when("/user/:uid/playlist/:pid/track/new", {
+                redirectTo: "/search"
+            })
+
             .when("/search", {
                 templateUrl: "views/search.view.html",
                 controller: "TrackSearchController",

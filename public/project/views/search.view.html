@@ -1,5 +1,5 @@
 <!--<div class="container-fluid" ng-controller="MovieSearchController as model">-->
-<div class="container-fluid">
+<div class="container">
     <h1>Track Search</h1>
 
     <div class="input-group">
@@ -10,24 +10,25 @@
     </div>
 
 
-    <table class="table">
-        <trhead>
-            <tr>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Poster</th>
+    <div ng-if="model.tracks">
+        <table class="table">
+            <trhead>
+                <tr>
+                    <th>Title</th>
+                    <th>Artist</th>
+                    <th>Poster</th>
+                    <th>Add to playlist</th>
+                </tr>
+            </trhead>
+            <tbody>
+            <tr ng-repeat="track in model.tracks">
+                <td><a href="#/details/{{track.id}}/{{title}}">{{track.name}}</a></td>
+                <td>{{track.artists[0].name}}</td>
+                <td><img ng-src="{{track.album.images[0].url}}" height="100px"/></td>
+                <td><a ng-click="model.add(track)" class="btn btn-primary btn-block">Add</a></td>
             </tr>
-        </trhead>
-        <tbody>
-        <tr ng-repeat="track in model.tracks">
-            <td><a href="#/details/{{track.id}}/{{title}}">{{track.name}}</a></td>
-            <td>{{track.artists[0].name}}</td>
-            <td><img ng-src="{{track.album.images[0].url}}" height="100px"/></td>
-        </tr>
-        </tbody>
-    </table>
-
-
-    {{model.tracks}}
+            </tbody>
+        </table>
+    </div>
 
 </div>
