@@ -4,11 +4,11 @@
 module.exports = function(app, model) {
     console.log("Hello from PROJECT playlist services on server");
 
-    app.get('/api/user/:uid/playlist', findAllPlaylistsForUser);
-    app.post('/api/user/:uid/playlist', createPlaylist);
-    app.get('/api/playlist/:playlistId', findPlaylistById);
-    app.delete('/api/playlist/:playlistId', deletePlaylist);
-    app.put('/api/playlist/:playlistId', updatePlaylist);
+    app.get('/projapi/user/:uid/playlist', findAllPlaylistsForUser);
+    app.post('/projapi/user/:uid/playlist', createPlaylist);
+    app.get('/projapi/playlist/:playlistId', findPlaylistById);
+    app.delete('/projapi/playlist/:playlistId', deletePlaylist);
+    app.put('/projapi/playlist/:playlistId', updatePlaylist);
 
 
     function createPlaylist(req, res) {

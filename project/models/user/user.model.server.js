@@ -8,17 +8,17 @@ module.exports = function (mongoose) {
         findUserById: findUserById,
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
-        findWebsitesForUser: findWebsitesForUser,
+        findPlaylistsForUser: findPlaylistsForUser,
         updateUser: updateUser,
         removeUser: removeUser
     };
     return api;
 
 
-    function findWebsitesForUser(userId) { //returns user object with websites
+    function findPlaylistsForUser(userId) { //returns user object with playlists
         return ProjectUserModel
             .findById(userId)
-            .populate("websites", "name") //just want names of websites from db
+            .populate("playlists", "name") //just want names of playlists from db
             .exec();
     }
 

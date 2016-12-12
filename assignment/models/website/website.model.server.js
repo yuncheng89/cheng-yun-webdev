@@ -1,8 +1,9 @@
-module.exports = function () {
+module.exports = function (mongoose) {
     var model = {};
-    var mongoose = require("mongoose");
+
     var WebsiteSchema = require("./website.schema.server")();
     var WebsiteModel = mongoose.model("WebsiteModel", WebsiteSchema);
+
     var api = {
         createWebsite: createWebsite,
         findWebsitesForUser: findWebsitesForUser,
@@ -13,6 +14,7 @@ module.exports = function () {
         setModel: setModel
     };
     return api;
+
     function setModel(_model) {
         model = _model;
     }

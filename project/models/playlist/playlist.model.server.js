@@ -1,11 +1,12 @@
-module.exports = function () {
+module.exports = function (mongoose) {
     var model = {};
-    var mongoose = require("mongoose");
-    var PlaylistSchema = require("./playlist.schema.server")();
+
+    var PlaylistSchema = require("./playlist.schema.server")(mongoose);
     var PlaylistModel = mongoose.model("PlaylistModel", PlaylistSchema);
+
     var api = {
         createPlaylist: createPlaylist,
-        findPlaylistsForuser: findPlaylistsForuser,
+        findPlaylistsForUser: findPlaylistsForUser,
         findPlaylistById: findPlaylistById,
         findAllTracksForPlaylist: findAllTracksForPlaylist,
         updatePlaylist: updatePlaylist,
@@ -13,6 +14,7 @@ module.exports = function () {
         setModel: setModel
     };
     return api;
+
     function setModel(_model) {
         model = _model;
     }
@@ -35,8 +37,8 @@ module.exports = function () {
             );
     }
 
-    function findPlaylistsForuser(userId) {
-        return model.userModel.findPlaylistsForuser(userId);
+    function findPlaylistsForUser(userId) {
+        return model.userModel.findPlaylistsForUser(userId);
     }
 
     function findAllTracksForPlaylist(playlistId) { //returns playlist object with tracks
@@ -53,7 +55,7 @@ module.exports = function () {
     function createPlaylist(userId, playlist) {
 
         return model.userModel
-            .finduserById(userId)
+            .findUserById(userId)
             .then(
                 function (userObj) {
                     var playlistObj = new PlaylistModel();

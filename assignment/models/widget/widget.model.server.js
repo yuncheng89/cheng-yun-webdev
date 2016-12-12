@@ -1,9 +1,9 @@
-
-module.exports = function () {
+module.exports = function (mongoose) {
     var model = {};
-    var mongoose = require("mongoose");
+
     var WidgetSchema = require("./widget.schema.server")();
     var WidgetModel = mongoose.model("WidgetModel", WidgetSchema);
+
     var api = {
         createWidget: createWidget,
         findAllWidgetsForPage: findAllWidgetsForPage,
@@ -14,6 +14,7 @@ module.exports = function () {
         setModel: setModel
     };
     return api;
+
     function setModel(_model) {
         model = _model;
     }

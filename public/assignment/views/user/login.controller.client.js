@@ -20,14 +20,15 @@
                         console.log("_id: ", user._id);
                         console.log("username: ", user.username);
                         if (user === '0') {
-                            vm.error = "No such user";
+                            vm.error = "No such user"; //This never displays
                         } else {
-                            //$rootScope.currentUser = user;
                             $location.url("/user/" + user._id);
                         }
                     })
                     .error(function (bbbb) {
-                        //vm.error = bbbb;
+                        if (bbbb == "Unauthorized") {
+                            vm.error = "Invalid username/password";
+                        }
                         console.log(bbbb);
                     });
             }

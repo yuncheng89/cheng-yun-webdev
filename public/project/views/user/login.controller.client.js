@@ -26,7 +26,9 @@
                         }
                     })
                     .error(function (bbbb) {
-                        //vm.error = bbbb;
+                        if (bbbb == "Unauthorized") {
+                            vm.error = "Invalid username/password";
+                        }
                         console.log(bbbb);
                     });
             }
