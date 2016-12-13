@@ -42,6 +42,7 @@
 
         function addTrack(sTrack) {
 
+            console.log(sTrack.id);
             console.log(sTrack.name);
             console.log(sTrack.artists[0].name);
             console.log(sTrack.album.name);
@@ -49,6 +50,7 @@
             console.log(sTrack.album.images[0].url);
 
             var track = {
+                sID: sTrack.id,
                 name: sTrack.name,
                 artist: sTrack.artists[0].name,
                 album: sTrack.album.name,

@@ -5,6 +5,7 @@ module.exports = function () {
     var mongoose = require("mongoose");
     var TrackSchema = mongoose.Schema({
         _playlist: {type: mongoose.Schema.Types.ObjectId, ref:"PlaylistModel"},
+        sID: String,
         name: String,
         artist: String,
         album: String,

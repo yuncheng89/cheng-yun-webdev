@@ -27,7 +27,7 @@
     <ul class="list-group">
         <li ng-repeat="track in model.tracks" class="list-group-item">
 
-            <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}/track/{{track._id}}">
+            <a href="#/details/{{track.sID}}/{{track.name}}">
                 {{track.name}}
             </a>
             <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}/track/{{track._id}}" class="pull-right" style="margin-left: 15px;">

@@ -44,7 +44,7 @@ module.exports = function (mongoose) {
     function findAllTracksForPlaylist(playlistId) { //returns playlist object with tracks
         return PlaylistModel
             .findById(playlistId)
-            .populate("tracks", "name") //just want names of tracks from db
+            .populate("tracks") //want names and sID
             .exec();
     }
 

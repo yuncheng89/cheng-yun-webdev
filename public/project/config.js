@@ -63,7 +63,9 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/playlist/:pid/track/new", {
-                redirectTo: "/search"
+                templateUrl: "views/search.view.html",
+                controller: "TrackSearchController",
+                controllerAs: "model"
             })
 
             .when("/search", {

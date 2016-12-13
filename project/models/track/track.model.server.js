@@ -45,6 +45,7 @@ module.exports = function (mongoose) {
                     var trackObj = new TrackModel();
                     trackObj._playlist = playlistId;
                     trackObj.order = order;
+                    trackObj.sID = newTrack.sID;
                     trackObj.name = newTrack.name;
                     trackObj.artist = newTrack.artist;
                     trackObj.album = newTrack.album;
@@ -75,6 +76,7 @@ module.exports = function (mongoose) {
             .findById(trackId)
             .then(
                 function(track) {
+                    track.sID = newTrack.sID;
                     track.name = newTrack.name;
                     track.text = newTrack.text;
                     track.artist = newTrack.artist;
