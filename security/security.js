@@ -105,7 +105,7 @@ module.exports = function(database, passport) {
                                 token: token
                             }
                         };
-                        return wamUserModel.userModel.createUser(newGoogleUser);
+                        return wamUserModel.createUser(newGoogleUser);
                     }
                 },
                 function(err) {
@@ -143,7 +143,7 @@ module.exports = function(database, passport) {
                                 token: token
                             }
                         };
-                        return wamUserModel.userModel.createUser(newFacebookUser);
+                        return wamUserModel.createUser(newFacebookUser);
                     }
                 },
                 function(err) {
