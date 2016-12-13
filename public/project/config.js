@@ -67,7 +67,11 @@
                 controller: "TrackSearchController",
                 controllerAs: "model"
             })
-
+            .when("/user/:uid/playlist/:pid/track/:tid", {
+                templateUrl: "views/track/track-edit.view.client.html",
+                controller: "TrackEditController",
+                controllerAs: "model"
+            })
             .when("/search", {
                 templateUrl: "views/search.view.html",
                 controller: "TrackSearchController",

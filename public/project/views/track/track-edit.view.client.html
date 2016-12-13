@@ -2,17 +2,17 @@
     <div class="row container-fluid">
         <div class="col-sm-4 hidden-xs">
             <div class="navbar-text pull-left" style="margin-left: 0px">
-                <a href="#/user/{{model.uid}}">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#/user/{{model.uid}}/playlist">
-                    Playlists
+                <a class="navbar-brand" href="#/user/{{model.uid}}/track">
+                    Tracks
                 </a>
             </div>
             <div class="navbar-text pull-right" style="margin-right: 27px;">
-                <a href="#/user/{{model.uid}}/playlist/new">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/new">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </div>
@@ -24,13 +24,13 @@
                 </a>
             </div>
             <div class="navbar-text pull-right" style="margin-right: 0px;">
-                <a ng-click="model.updatePlaylist()">
+                <a ng-click="model.updateTrack()">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#/user/{{model.uid}}/playlist/{{model.pid}}">
-                    Edit Playlist
+                <a class="navbar-brand" href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/{{model.tid}}">
+                    Edit Track
                 </a>
             </div>
         </div>
@@ -43,11 +43,11 @@
         <!--{{models.playlists}}-->
 
         <ul class="list-group">
-            <li ng-repeat="playlist in model.playlists" class="list-group-item">
-                <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}/track">
-                    {{playlist.name}}
+            <li ng-repeat="track in model.tracks" class="list-group-item">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/{{track._id}}">
+                    {{track.name}}
                 </a>
-                <a href="#/user/{{model.uid}}/playlist/{{playlist._id}}" class="pull-right" style="margin-left: 15px;">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/{{track._id}}" class="pull-right" style="margin-left: 15px;">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
                 <a href="#" class="pull-right">
@@ -68,16 +68,16 @@
         <form>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input ng-model="model.playlist.name" type="text" class="form-control" id="name" placeholder="{{model.playlist.name}}">
+                <input ng-model="model.track.name" type="text" class="form-control" id="name" placeholder="{{model.track.name}}">
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea ng-model="model.playlist.description" type="text" class="form-control" rows="5" id="description" placeholder="{{model.playlist.description}}"></textarea>
+                <textarea ng-model="model.track.description" type="text" class="form-control" rows="5" id="description" placeholder="{{model.track.description}}"></textarea>
             </div>
 
         </form>
 
-        <a ng-click="model.deletePlaylist()"
+        <a ng-click="model.deleteTrack()"
            class="btn btn-danger btn-block">Delete</a>
 
     </div>
