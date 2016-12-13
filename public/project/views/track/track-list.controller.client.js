@@ -11,8 +11,7 @@
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.pid = $routeParams.pid;
-        vm.checkSafeHtml = checkSafeHtml;
-        vm.checkSafeYouTubeUrl = checkSafeYouTubeUrl;
+
 
         function init() {
             TrackService

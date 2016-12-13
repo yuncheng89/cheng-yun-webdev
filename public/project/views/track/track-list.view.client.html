@@ -2,7 +2,7 @@
     <div class="row container-fluid col-sm-12">
         <div class="col-sm-12">
             <div class="navbar-text pull-left" style="margin-left: 0px">
-                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page">
+                <a href="#/user/{{model.uid}}/playlist/{{model.pid}}">
                     <span class="glyphicon glyphicon-chevron-left"></span>
                 </a>
             </div>
@@ -12,7 +12,7 @@
                 </a>
             </div>
             <div class="navbar-header">
-                <a class="navbar-brand" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/track">
+                <a class="navbar-brand" href="#/user/{{model.uid}}/playlist/{{model.pid}}/track">
                     Tracks
                 </a>
             </div>
@@ -39,6 +39,8 @@
         </li>
 
     </ul>
+
+    {{model.tracks}}
 
 </div>
 

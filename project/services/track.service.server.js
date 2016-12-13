@@ -2,22 +2,23 @@
  * Created by macbook on 12/11/16.
  */
 module.exports = function(app, model) {
+
     console.log("Hello from PROJECT track services on server");
 
-    app.post("/projapi/page/:pageId/track", createTrack);
-    app.get("/projapi/page/:pageId/track", findAllTracksForPage);
+    app.post("/projapi/playlist/:playlistId/track", createTrack);
+    app.get("/projapi/playlist/:playlistId/track", findAllTracksForPlaylist);
     app.get("/projapi/track/:trackId", findTrackById);
     app.put("/projapi/track/:trackId", updateTrack);
     app.delete("/projapi/track/:trackId", deleteTrack);
 
-    app.put("/projapi/page/:pageId/track", sortTracks);
+    app.put("/projapi/playlist/:playlistId/track", sortTracks);
 
 
     function createTrack(req, res) {
-        var pageId = req.params.pageId;
+        var playlistId = req.params.playlistId;
         var newTrack = req.body;
         model.trackModel
-            .createTrack(pageId, newTrack)
+            .createTrack(playlistId, newTrack)
             .then(
                 function (trackObj) { //get WIDGET object in return
                     res.send(trackObj);
@@ -28,11 +29,11 @@ module.exports = function(app, model) {
             );
     }
 
-    function findAllTracksForPage(req, res) {
-        var pageId = req.params.pageId;
+    function findAllTracksForPlaylist(req, res) {
+        var playlistId = req.params.playlistId;
 
         model.trackModel
-            .findAllTracksForPage(pageId)
+            .findAllTracksForPlaylist(playlistId)
             .then(function(tracks) {
                 res.json(tracks);
             });
@@ -82,12 +83,12 @@ module.exports = function(app, model) {
 
 
     function sortTracks(req, res) {
-        var pageId = req.params.pageId;
+        var playlistId = req.params.playlistId;
         var startIndex = req.query.initial;
         var endIndex = req.query.final;
 
         model.trackModel
-            .reorderTrack(pageId, startIndex, endIndex)
+            .reorderTrack(playlistId, startIndex, endIndex)
             .then(
                 function (status) {
                     return res.json(200);

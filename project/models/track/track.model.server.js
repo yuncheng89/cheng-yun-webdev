@@ -43,9 +43,12 @@ module.exports = function (mongoose) {
                     console.log("playlistObj.tracks.length", playlistObj.tracks.length);
 
                     var trackObj = new TrackModel();
-                    trackObj.trackType = newTrack.trackType;
                     trackObj._playlist = playlistId;
                     trackObj.order = order;
+                    trackObj.name = newTrack.name;
+                    trackObj.artist = newTrack.artist;
+                    trackObj.album = newTrack.album;
+                    trackObj.duration = newTrack.duration;
 
                     playlistObj.tracks.push(trackObj);
                     playlistObj.save();

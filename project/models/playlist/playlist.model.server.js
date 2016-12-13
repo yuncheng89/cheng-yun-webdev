@@ -49,7 +49,10 @@ module.exports = function (mongoose) {
     }
 
     function findPlaylistById(playlistId) {
-        return PlaylistModel.findById(playlistId);
+        return PlaylistModel.findOne({
+            _id: playlistId
+        });
+        //return PlaylistModel.findById(playlistId);
     }
 
     function createPlaylist(userId, playlist) {
