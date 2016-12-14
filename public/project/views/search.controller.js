@@ -42,30 +42,37 @@
 
         function addTrack(sTrack) {
 
-            console.log(sTrack.id);
-            console.log(sTrack.name);
-            console.log(sTrack.artists[0].name);
-            console.log(sTrack.album.name);
-            console.log(sTrack.duration_ms);
-            console.log(sTrack.album.images[0].url);
+            //If not logged in, go log in!
+            if (!vm.uid) {
+                $location.url("/login");
+            }
 
-            var track = {
-                sID: sTrack.id,
-                name: sTrack.name,
-                artist: sTrack.artists[0].name,
-                album: sTrack.album.name,
-                album_image: sTrack.album.images[0].url,
-                duration: sTrack.duration_ms,
-                preview_url: sTrack.preview_url
-            };
+            else {
+                console.log(sTrack.id);
+                console.log(sTrack.name);
+                console.log(sTrack.artists[0].name);
+                console.log(sTrack.album.name);
+                console.log(sTrack.duration_ms);
+                console.log(sTrack.album.images[0].url);
 
-            TrackService
-                .createTrack(vm.pid, track)
-                .success(function (result) {
-                    console.log(result);
-                    console.log("/user/"+vm.uid+"/playlist/"+vm.pid+"/track");
-                    $location.url("/user/"+vm.uid+"/playlist/"+vm.pid+"/track");
-                });
+                var track = {
+                    sID: sTrack.id,
+                    name: sTrack.name,
+                    artist: sTrack.artists[0].name,
+                    album: sTrack.album.name,
+                    album_image: sTrack.album.images[0].url,
+                    duration: sTrack.duration_ms,
+                    preview_url: sTrack.preview_url
+                };
+
+                TrackService
+                    .createTrack(vm.pid, track)
+                    .success(function (result) {
+                        console.log(result);
+                        console.log("/user/"+vm.uid+"/playlist/"+vm.pid+"/track");
+                        $location.url("/user/"+vm.uid+"/playlist/"+vm.pid+"/track");
+                    });
+            }
         }
     }
 

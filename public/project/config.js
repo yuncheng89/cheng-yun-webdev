@@ -10,8 +10,8 @@
         $routeProvider
 
             .when("/", {
-                templateUrl: "views/user/login.view.client.html",
-                controller: "LoginController",
+                templateUrl: "views/search.view.html",
+                controller: "TrackSearchController",
                 controllerAs: "model"
             })
             .when("/login", {
