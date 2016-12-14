@@ -24,6 +24,10 @@ body {
     overflow-x: hidden;
 }
 
+.splash {
+    background-image: url("../../images/mixtape_bg.jpeg");
+}
+
 .navbar-default {
     background-color: #428bca;
 }
