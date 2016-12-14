@@ -54,8 +54,9 @@
                 name: sTrack.name,
                 artist: sTrack.artists[0].name,
                 album: sTrack.album.name,
+                album_image: sTrack.album.images[0].url,
                 duration: sTrack.duration_ms,
-                album_image: sTrack.album.images[0].url
+                preview_url: sTrack.preview_url
             };
 
             TrackService

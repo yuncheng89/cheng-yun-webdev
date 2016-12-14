@@ -49,7 +49,9 @@ module.exports = function (mongoose) {
                     trackObj.name = newTrack.name;
                     trackObj.artist = newTrack.artist;
                     trackObj.album = newTrack.album;
+                    trackObj.album_image = newTrack.album_image;
                     trackObj.duration = newTrack.duration;
+                    trackObj.preview_url = newTrack.preview_url;
 
                     playlistObj.tracks.push(trackObj);
                     playlistObj.save();

@@ -15,6 +15,7 @@
 
         vm.deleteTrack  = deleteTrack;
         vm.updateTrack = updateTrack;
+        vm.playSound = playSound;
 
         function init() {
             TrackService
@@ -32,6 +33,11 @@
         }
         init();
 
+        function playSound(url) {
+            console.log("Play sound clicked");
+            var a = new Audio(url);
+            a.play();
+        }
 
         function deleteTrack() {
             console.log("Delete track "+vm.tid);

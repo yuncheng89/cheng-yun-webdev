@@ -9,8 +9,9 @@ module.exports = function () {
         name: String,
         artist: String,
         album: String,
-        duration: Number,
         album_image: String,
+        duration: Number,
+        preview_url: String,
         dateCreated: {type: Date, default: Date.now},
         order: {type: Number, default: 0 }
     });

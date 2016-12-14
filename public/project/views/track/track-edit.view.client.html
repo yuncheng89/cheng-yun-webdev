@@ -50,8 +50,8 @@
                 <a href="#/user/{{model.uid}}/playlist/{{model.pid}}/track/{{track._id}}" class="pull-right" style="margin-left: 15px;">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
-                <a href="#" class="pull-right">
-                    <span class="glyphicon glyphicon-play"></span>
+                <a ng-click="model.playSound(track.preview_url)">
+                    <span class="glyphicon glyphicon-play pull-right"></span>
                 </a>
             </li>
 

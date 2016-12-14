@@ -11,7 +11,7 @@
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.pid = $routeParams.pid;
-
+        vm.playSound = playSound;
 
         function init() {
             TrackService
@@ -23,6 +23,11 @@
         }
         init();
 
+        function playSound(url) {
+            console.log("Play sound clicked");
+            var a = new Audio(url);
+            a.play();
+        }
 
         function sortByOrder(a,b) {
             if (a.order < b.order)
