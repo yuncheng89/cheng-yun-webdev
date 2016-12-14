@@ -163,7 +163,7 @@ module.exports = function(app, model, sec) {
                     if(!user) { //did not find user
                         res.send('0');
                     }
-                    res.json(users[0]);
+                    res.json(user);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
@@ -177,12 +177,11 @@ module.exports = function(app, model, sec) {
             .userModel
             .findUserByUsername(username)
             .then(
-                function (users) {
-                    if(users.length===1) {
-                        res.json(users[0]);
-                    } else {
+                function (user) {
+                    if(!user) { //did not find user
                         res.send('0');
                     }
+                    res.json(user);
                 },
                 function (error) {
                     res.sendStatus(400).send(error);
