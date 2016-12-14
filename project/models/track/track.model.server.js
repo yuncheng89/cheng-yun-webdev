@@ -31,7 +31,7 @@ module.exports = function (mongoose) {
                     var order = 0;
                     if (playlistObj.tracks.length>0) {
                         var maxOrder = 0;
-                        for (i = 0; i < playlistObj.tracks.length; i++) {
+                        for (var i = 0; i < playlistObj.tracks.length; i++) {
                             if (playlistObj.tracks[i].order>maxOrder) {
                                 maxOrder = playlistObj.tracks[i].order;
                             }
