@@ -16,6 +16,7 @@
         vm.title = $routeParams.title;
         vm.uid = $routeParams.uid;
         vm.pid = $routeParams.pid;
+        vm.playSound = playSound;
 
         console.log(vm.title);
         console.log(vm.uid);
@@ -29,6 +30,12 @@
         }
 
         init();
+
+        function playSound(url) {
+            console.log("Play sound clicked");
+            var a = new Audio(url);
+            a.play();
+        }
 
         function searchTrackByTitle(title) {
             console.log(title);
