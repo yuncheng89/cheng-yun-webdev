@@ -48,10 +48,12 @@ body {
 .banner-text {
     color: #444444;
     display: inline;
+    max-width: 50%;
     font-family: poller_oneregular;
     font-size: 30px;
     font-weight: normal;
-    padding-top: 25px;
+    padding-top: 10px;
     padding-right: 15px;
 }
+
 
