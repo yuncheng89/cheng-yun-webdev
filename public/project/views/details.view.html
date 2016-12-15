@@ -3,15 +3,21 @@
 </div>
 
 <div class="container-fluid">
+
     <h1>
         <a href="#/search">
         <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
         </a>
-        {{model.track.name}}
+
+        <h3>
+            {{model.track.name}}
+        </h3>
     </h1>
 
     <div class="row">
         <div class="col-xs-6">
+
+
             <div>
                 Artist: {{model.track.artists[0].name}}
             </div>
@@ -19,8 +25,25 @@
                 Album: {{model.track.album.name}}
             </div>
             <div>
-                Duration: {{model.track.duration_ms}}
+                Duration: {{model.getDuration(model.track.duration_ms)}}
             </div>
+            <div>
+
+                <h1>
+                    <a ng-click="model.playSound(model.track.preview_url)">
+                        <span class="glyphicon glyphicon-play" aria-hidden="true"></span>
+                    </a>
+                </h1>
+
+            </div>
+
+            <!--<div>-->
+                <!--<video controls="" autoplay="">-->
+                    <!--<source ng-src="{{model.checkSafeAudioUrl(model.track.preview_url)}}" type="audio/mpeg">-->
+                <!--</video>-->
+            <!--</div>-->
+
+
         </div>
 
         <div class="col-xs-6">
@@ -28,7 +51,5 @@
         </div>
     </div>
 
-
-{{model.track}}
 
 </div>

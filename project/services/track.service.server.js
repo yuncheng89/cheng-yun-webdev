@@ -20,7 +20,7 @@ module.exports = function(app, model) {
         model.trackModel
             .createTrack(playlistId, newTrack)
             .then(
-                function (trackObj) { //get WIDGET object in return
+                function (trackObj) {
                     res.send(trackObj);
                 },
                 function(err) {
