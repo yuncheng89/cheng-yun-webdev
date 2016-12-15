@@ -1,3 +1,14 @@
+@font-face {
+    font-family: 'poller_oneregular';
+    src: url('../../fonts/pollerone/pollerone-webfont.eot');
+    src: url('../../fonts/pollerone/pollerone-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../../fonts/pollerone/pollerone-webfont.woff') format('woff'),
+    url('../../fonts/pollerone/pollerone-webfont.ttf') format('truetype'),
+    url('../../fonts/pollerone/pollerone-webfont.svg#poller_oneregular') format('svg');
+}
+
+
+
 .navbar-default .navbar-brand,
 .navbar-text a span
 {
@@ -30,7 +41,17 @@ body {
 
 .banner {
     width: 100%;
-    background-color: #e8e8e8;
+    background-image: url(../../images/mixtape_banner.png);
     height: 100px;
+}
+
+.banner-text {
+    color: #444444;
+    display: inline;
+    font-family: poller_oneregular;
+    font-size: 30px;
+    font-weight: normal;
+    padding-top: 25px;
+    padding-right: 15px;
 }
 
