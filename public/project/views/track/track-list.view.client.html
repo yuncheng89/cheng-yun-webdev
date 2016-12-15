@@ -21,10 +21,10 @@
 </nav>
 
 
-<div class="row container-fluid" wam-sortable>
+<div class="row container-fluid">
     <!--{{model.playlists}}-->
 
-    <ul class="list-group">
+    <ul class="list-group" mn-sortable>
         <li ng-repeat="track in model.tracks" class="list-group-item">
 
             <a href="#/details/{{track.sID}}/{{track.name}}">

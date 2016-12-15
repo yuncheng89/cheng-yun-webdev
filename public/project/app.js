@@ -1,3 +1,3 @@
 (function (){ // IIFE
-    angular.module("MixtapeNetwork", ["ngRoute"]);
+    angular.module("MixtapeNetwork", ["ngRoute", "mnDirectives"]);
 })();
