@@ -24,12 +24,13 @@ body {
     overflow-x: hidden;
 }
 
-.navbar-default {
-    background-color: #428bca;
-}
-
 .padding-for-icon {
     margin-right: 20px;
 }
 
+.banner {
+    width: 100%;
+    background-color: #e8e8e8;
+    height: 100px;
+}
 
